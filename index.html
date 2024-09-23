@@ -1,123 +1,126 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tienda de Productos</title>
-        <link rel="stylesheet" href="style.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script type="module">
-                // Importar las funciones necesarias de Firebase
-                import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-                import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Productos</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-                // Configuración de Firebase
-                const firebaseConfig = {
-                    apiKey: "AIzaSyBFTypg5rh1dzt8fxmiA03UhKR8Uf3KA6Q",
-                    authDomain: "tienda-c69be.firebaseapp.com",
-                    projectId: "tienda-c69be",
-                    storageBucket: "tienda-c69be.appspot.com",
-                    messagingSenderId: "771742316743",
-                    appId: "1:771742316743:web:2dd6d3822adc6f09b626e2"
-                };
+    <script type="module">
+      // Importar las funciones necesarias de Firebase
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+      import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+      
+      // Importar la variable totalCosto desde datos.js
+      import { totalCosto, actualizarTotal } from "./datos.js";  // Importación de datos.js
 
-                // Inicializar Firebase
-                const app = initializeApp(firebaseConfig);
-                const db = getFirestore(app); // Definir db aquí
+      // Configuración de Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyBFTypg5rh1dzt8fxmiA03UhKR8Uf3KA6Q",
+        authDomain: "tienda-c69be.firebaseapp.com",
+        projectId: "tienda-c69be",
+        storageBucket: "tienda-c69be.appspot.com",
+        messagingSenderId: "771742316743",
+        appId: "1:771742316743:web:2dd6d3822adc6f09b626e2"
+      };
 
-                // Función para insertar datos
-                async function insertarDatos(nombre,direccion, telefono, total) {
-                    try {
-                        const docRef = await addDoc(collection(db, "productos"), {
-                            nombre: nombre,
-                            direccion: direccion,
-                            telefono: telefono,
-                            total: total,
-                        });
-                        console.log("Documento escrito con ID: ", docRef.id);
-                        alert("Datos insertados correctamente");
-                    } catch (e) {
-                        console.error("Error al añadir documento: ", e);
-                        alert("Error al insertar datos");
-                    }
-                }
+      // Inicializar Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
 
+      // Función para insertar datos
+      async function insertarDatos(nombre, direccion, telefono, total) {
+        try {
+          const docRef = await addDoc(collection(db, "productos"), {
+            nombre: nombre,
+            direccion: direccion,
+            telefono: telefono,
+            total: total,
+          });
+          console.log("Documento escrito con ID: ", docRef.id);
+          alert("Datos insertados correctamente");
+        } catch (e) {
+          console.error("Error al añadir documento: ", e);
+          alert("Error al insertar datos");
+        }
+      }
 
+      // Llama a la función con los datos que deseas insertar al hacer clic en finalizar compra
+      window.onload = function() {
+        document.getElementById('enviarPedidoButton').addEventListener('click', function() {
+          insertarDatos("qqqq", "cra 7 #9-12", "qqqq", totalCosto); // Aquí se utiliza totalCosto importado
+        });
+      };
+    </script>
+  </head>
+  <body>
 
-
-
-
-        </script>
-    </head>
-    <body>
-
-        <!-- Barra de Navegación -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-            <a class="navbar-brand" href="#">Mi Tienda</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">PROMOCIONES</a>
-                </li>
-
-                </ul>
-            </div>
-            </div>
-        </nav>
-
-        <!-- Sección de Productos con Buscador -->
-        <div class="container mt-5">
-            <h1 class="text-center mb-4">Lista de Productos</h1>
-
-            <!-- Buscador -->
-            <div class="row mb-4">
-            <div class="col-md-6 offset-md-3">
-                <input type="text" id="productSearch" class="form-control" placeholder="Buscar productos...">
-            </div>
-            </div>
-
-            <!-- Lista de Productos -->
-            <div class="row" id="productList">
-            <!-- Cada producto será generado dinámicamente -->
-            </div>
-
-            <!-- Botón Finalizar Compra -->
-            <div class="row mt-4">
-            <div class="col text-center">
-                <button id="finalizarCompra" class="btn btn-primary" disabled>Finalizar Compra</button>
-            </div>
-            </div>
+    <!-- Barra de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Mi Tienda</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">PROMOCIONES</a>
+            </li>
+          </ul>
         </div>
+      </div>
+    </nav>
 
-        <!-- Icono de Carrito -->
-        <div class="cart-icon" id="cartIcon">
-            🛒 <span id="cartCount" class="badge bg-danger">0</span>
+    <!-- Sección de Productos con Buscador -->
+    <div class="container mt-5">
+      <h1 class="text-center mb-4">Lista de Productos</h1>
+
+      <!-- Buscador -->
+      <div class="row mb-4">
+        <div class="col-md-6 offset-md-3">
+          <input type="text" id="productSearch" class="form-control" placeholder="Buscar productos...">
         </div>
+      </div>
 
-            <!-- Modal de Resumen de Pedido -->
-            <div class="modal fade" id="pedidoModal" tabindex="-1" aria-labelledby="pedidoModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="pedidoModalLabel">Resumen de Pedido</h5>
-                            <button type="button" class="btn-close" id="closeModalButton"></button>
-                        </div>
-                        <div class="modal-body">
-                            <pre id="resumenPedido"></pre>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" id="footerCloseButton">Cerrar</button>
-                            <button type="button" class="btn btn-primary" id="enviarPedidoButton">Enviar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- Lista de Productos -->
+      <div class="row" id="productList">
+        <!-- Cada producto será generado dinámicamente -->
+      </div>
 
-        <script src="datos.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+      <!-- Botón Finalizar Compra -->
+      <div class="row mt-4">
+        <div class="col text-center">
+          <button id="finalizarCompra" class="btn btn-primary" disabled>Finalizar Compra</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Icono de Carrito -->
+    <div class="cart-icon" id="cartIcon">
+      🛒 <span id="cartCount" class="badge bg-danger">0</span>
+    </div>
+
+    <!-- Modal de Resumen de Pedido -->
+    <div class="modal fade" id="pedidoModal" tabindex="-1" aria-labelledby="pedidoModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="pedidoModalLabel">Resumen de Pedido</h5>
+            <button type="button" class="btn-close" id="closeModalButton"></button>
+          </div>
+          <div class="modal-body">
+            <pre id="resumenPedido"></pre>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="footerCloseButton">Cerrar</button>
+            <button type="button" class="btn btn-primary" id="enviarPedidoButton">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>

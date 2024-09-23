@@ -1,5 +1,3 @@
-
-
 const productos = [
     { id: 1, nombre: "Café Colombiano", precio: "$8000", descripcion: "Café premium de origen colombiano.", categoria: "Bebidas", imagen: "https://via.placeholder.com/150" },
     { id: 2, nombre: "Arequipe", precio: "$5500", descripcion: "Delicioso dulce de leche, ideal para untar.", categoria: "Dulces", imagen: "https://via.placeholder.com/150" },
@@ -12,6 +10,15 @@ const productos = [
     { id: 9, nombre: "Aguapanela", precio: "3500", descripcion: "Bebida tradicional de panela y agua.", categoria: "Bebidas", imagen: "https://via.placeholder.com/150" },
     { id: 10, nombre: "Tamal Tolimense", precio: "$15000", descripcion: "Tamal relleno de carne, arroz y especias.", categoria: "Comidas", imagen: "https://via.placeholder.com/150" },
 ];
+
+// datos.js
+export let totalCosto = 0; // Asegúrate de actualizar esta variable según tu lógica
+
+export function actualizarTotal(nuevoTotal) {
+  totalCosto = nuevoTotal;
+}
+
+
 let productosSeleccionados = {};
 
 function generarProductoHTML(producto) {
@@ -108,7 +115,7 @@ mostrarProductos(productos);
 
 // Finalizar Compra
 document.getElementById('finalizarCompra').addEventListener('click', function() {
-  let totalCosto = 0;
+
   let resumenTexto = "Resumen de Pedido:\n\n";
 
   for (const [id, cantidad] of Object.entries(productosSeleccionados)) {
@@ -119,6 +126,8 @@ document.getElementById('finalizarCompra').addEventListener('click', function() 
       resumenTexto += `${producto.nombre}: ${cantidad} - Precio: $${costoProducto}\n`;
     }
   }
+
+
 
   const idRandom = Math.floor(Math.random() * 100000); // Generar un ID aleatorio
   resumenTexto += `\nCosto Total: $${totalCosto}\nID del pedido: ${idRandom}`;
