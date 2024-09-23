@@ -1,11 +1,3 @@
-// Importar Firebase App y Firestore
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
-
-
-
-// Ahora puedes usar `db` para interactuar con Firestore
-
 
 
 const productos = [
@@ -184,13 +176,7 @@ document.getElementById('enviarPedidoButton').addEventListener('click', async fu
           }
       }
 
-      var article_id = 1;
-      var article = {
-              'title': 'Conectar Firebase con tu app de JavaScript',
-      }
-  
-      firebase.database().ref('pedidos/' + article_id).set(article);
-
+    
       alert('Pedido enviado exitosamente');
       // Cierra el modal después de enviar
       const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
@@ -200,5 +186,7 @@ document.getElementById('enviarPedidoButton').addEventListener('click', async fu
       alert('Hubo un error al enviar el pedido. Inténtalo de nuevo.');
   }
 });
+
+
 
 

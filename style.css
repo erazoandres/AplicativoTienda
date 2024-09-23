@@ -27,7 +27,8 @@
   border: 1px solid #e0e0e0;
   border-radius: 10px; 
   overflow: hidden; 
-  transition: box-shadow 0.2s; 
+  transition: box-shadow 0.1s; 
+  transition: .5s ease;
 }
 .card:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
