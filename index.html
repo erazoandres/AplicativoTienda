@@ -4,72 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tienda de Productos</title>
+  <link rel="stylesheet" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    /* Estilos previos */
-    .selected {
-      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.8), 0 4px 20px rgba(0, 0, 0, 0.5);
-      position: relative;
-      border-radius: 10px;
-      transition: transform 0.2s;
-    }
-    .selected:hover {
-      transform: scale(1.05);
-    }
-    .quantity-icon {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: lightgreen;
-      border-radius: 50%;
-      padding: 5px;
-      font-size: 12px;
-      display: none;
-    }
-    .card {
-      width: 100%;
-      max-width: 300px; 
-      position: relative;
-      margin: 10px;
-      border: 1px solid #e0e0e0;
-      border-radius: 10px; 
-      overflow: hidden; 
-      transition: box-shadow 0.2s; 
-    }
-    .card:hover {
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-    .quantity-controls {
-      display: none; 
-      padding: 10px; 
-      background-color: #f8f9fa; 
-      border-top: 1px solid #e0e0e0; 
-    }
-    .quantity-controls button {
-      margin: 0 5px;
-    }
-    .card-img-top {
-      width: 100%; 
-      height: 150px; 
-      object-fit: cover; 
-    }
-    .row {
-      justify-content: center; 
-    }
-    .cart-icon {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: white;
-      border: 1px solid #007bff;
-      border-radius: 50%;
-      padding: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-    }
-  </style>
+
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+
 </head>
 <body>
+
+
+
 
   <!-- Barra de Navegación -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -121,182 +67,67 @@
     <!-- Modal de Resumen de Pedido -->
     <div class="modal fade" id="pedidoModal" tabindex="-1" aria-labelledby="pedidoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="pedidoModalLabel">Resumen de Pedido</h5>
-            <button type="button" class="btn-close" id="closeModalButton"></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pedidoModalLabel">Resumen de Pedido</h5>
+                    <button type="button" class="btn-close" id="closeModalButton"></button>
+                </div>
+                <div class="modal-body">
+                    <pre id="resumenPedido"></pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="footerCloseButton">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="enviarPedidoButton">Enviar</button>
+                </div>
             </div>
-            <div class="modal-body">
-            <pre id="resumenPedido"></pre>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" id="footerCloseButton">Cerrar</button>
-            </div>
-        </div>
         </div>
     </div>
 
-  <script>
-    const productos = [
-        { id: 1, nombre: "Café Colombiano", precio: "$8000", descripcion: "Café premium de origen colombiano.", categoria: "Bebidas", imagen: "https://via.placeholder.com/150" },
-        { id: 2, nombre: "Arequipe", precio: "$5500", descripcion: "Delicioso dulce de leche, ideal para untar.", categoria: "Dulces", imagen: "https://via.placeholder.com/150" },
-        { id: 3, nombre: "Bocadillo Veleño", precio: "$3000", descripcion: "Dulce de guayaba típico de la región.", categoria: "Dulces", imagen: "https://via.placeholder.com/150" },
-        { id: 4, nombre: "Salsa de Aji", precio: "$4500", descripcion: "Salsa picante para darle sabor a tus platos.", categoria: "Condimentos", imagen: "https://via.placeholder.com/150" },
-        { id: 5, nombre: "Empanadas", precio: "$2200", descripcion: "Deliciosas empanadas de carne o pollo.", categoria: "Comidas", imagen: "https://via.placeholder.com/150" },
-        { id: 6, nombre: "Postobón Manzana", precio: "$1800", descripcion: "Refresco de manzana con sabor auténtico.", categoria: "Bebidas", imagen: "https://via.placeholder.com/150" },
-        { id: 7, nombre: "Bandeja Paisa", precio: "$19000", descripcion: "Plato típico de la región paisa con variedad de ingredientes.", categoria: "Comidas", imagen: "https://via.placeholder.com/150" },
-        { id: 8, nombre: "Chocoramo", precio: "$3000", descripcion: "Galleta cubierta de chocolate y rellena de crema.", categoria: "Dulces", imagen: "https://via.placeholder.com/150" },
-        { id: 9, nombre: "Aguapanela", precio: "3500", descripcion: "Bebida tradicional de panela y agua.", categoria: "Bebidas", imagen: "https://via.placeholder.com/150" },
-        { id: 10, nombre: "Tamal Tolimense", precio: "$15000", descripcion: "Tamal relleno de carne, arroz y especias.", categoria: "Comidas", imagen: "https://via.placeholder.com/150" },
-    ];
-    let productosSeleccionados = {};
-
-    function generarProductoHTML(producto) {
-      return `
-        <div class="col-md-3 mb-4"> 
-          <div class="card h-100 producto" data-id="${producto.id}">
-            <div class="quantity-icon">0</div>
-            <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}">
-            <div class="card-body">
-              <h5 class="card-title">${producto.nombre}</h5>
-              <p class="card-text">${producto.descripcion}</p>
-              <p><strong>Precio:</strong> ${producto.precio}</p>
-              <p><strong>Categoría:</strong> ${producto.categoria}</p>
-            </div>
-            <div class="quantity-controls">
-              <button class="btn btn-sm btn-secondary btn-decrement">-</button>
-              <span class="quantity-display">1</span>
-              <button class="btn btn-sm btn-secondary btn-increment">+</button>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function mostrarProductos(productosFiltrados) {
-      const productList = document.getElementById('productList');
-      productList.innerHTML = productosFiltrados.map(producto => generarProductoHTML(producto)).join('');
-
-      document.querySelectorAll('.producto').forEach(producto => {
-        producto.addEventListener('click', function() {
-          const productId = parseInt(this.getAttribute('data-id'));
-
-          if (productosSeleccionados[productId]) {
-            return;
-          }
-
-          productosSeleccionados[productId] = 1;
-          this.querySelector('.quantity-icon').textContent = productosSeleccionados[productId];
-          this.querySelector('.quantity-icon').style.display = 'block';
-          this.querySelector('.quantity-controls').style.display = 'block';
-          this.querySelector('.quantity-display').textContent = productosSeleccionados[productId];
-          this.classList.add('selected');
-
-          document.getElementById('finalizarCompra').disabled = Object.keys(productosSeleccionados).length === 0;
-          actualizarCarrito();
-        });
-      });
-
-      document.querySelectorAll('.producto').forEach(producto => {
-        producto.querySelector('.btn-increment').addEventListener('click', function(event) {
-          event.stopPropagation();
-          const productId = parseInt(producto.getAttribute('data-id'));
-          if (productosSeleccionados[productId]) {
-            productosSeleccionados[productId]++;
-            producto.querySelector('.quantity-icon').textContent = productosSeleccionados[productId];
-            producto.querySelector('.quantity-display').textContent = productosSeleccionados[productId];
-            actualizarCarrito();
-          }
-        });
-
-        producto.querySelector('.btn-decrement').addEventListener('click', function(event) {
-          event.stopPropagation();
-          const productId = parseInt(producto.getAttribute('data-id'));
-          if (productosSeleccionados[productId] > 1) {
-            productosSeleccionados[productId]--;
-            producto.querySelector('.quantity-icon').textContent = productosSeleccionados[productId];
-            producto.querySelector('.quantity-display').textContent = productosSeleccionados[productId];
-            actualizarCarrito();
-          } else {
-            delete productosSeleccionados[productId];
-            producto.querySelector('.quantity-icon').style.display = 'none';
-            producto.querySelector('.quantity-controls').style.display = 'none';
-            producto.classList.remove('selected');
-            actualizarCarrito();
-          }
-        });
-      });
-    }
-
-    function actualizarCarrito() {
-      const totalProductos = Object.values(productosSeleccionados).reduce((a, b) => a + b, 0);
-      document.getElementById('cartCount').textContent = totalProductos;
-    }
-
-    // Filtrado de productos por búsqueda
-    document.getElementById('productSearch').addEventListener('input', function() {
-      const searchTerm = this.value.toLowerCase();
-      const productosFiltrados = productos.filter(producto => producto.nombre.toLowerCase().includes(searchTerm));
-      mostrarProductos(productosFiltrados);
-    });
-
-    // Mostrar todos los productos al cargar
-    mostrarProductos(productos);
-
-    // Finalizar Compra
-    document.getElementById('finalizarCompra').addEventListener('click', function() {
-      let totalCosto = 0;
-      let resumenTexto = "Resumen de Pedido:\n\n";
-
-      for (const [id, cantidad] of Object.entries(productosSeleccionados)) {
-        const producto = productos.find(p => p.id === parseInt(id));
-        if (producto) {
-          const costoProducto = parseFloat(producto.precio.replace('$', ''));
-          totalCosto += costoProducto * cantidad;
-          resumenTexto += `${producto.nombre}: ${cantidad} - Precio: $${costoProducto}\n`;
-        }
-      }
-
-      const idRandom = Math.floor(Math.random() * 100000); // Generar un ID aleatorio
-      resumenTexto += `\nCosto Total: $${totalCosto}\nID del pedido: ${idRandom}`;
-
-      // Mostrar el resumen en el modal
-      document.getElementById('resumenPedido').textContent = resumenTexto;
-
-      // Mostrar el modal
-      const pedidoModal = new bootstrap.Modal(document.getElementById('pedidoModal'));
-      pedidoModal.show();
-    });
-
-// Confirmar cierre del modal al hacer clic en el botón de cerrar
-const closeModalButton = document.getElementById('closeModalButton');
-  const footerCloseButton = document.getElementById('footerCloseButton');
-
-  function confirmCloseModal() {
-    const confirmClose = confirm("¿Estás seguro de que quieres cerrar el resumen del pedido?");
-    const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
-    pedidoModal.hide(); // Cerrar el modal si se confirma
-    return confirmClose;
-  }
-
-  closeModalButton.addEventListener('click', function(event) {
-    if (!confirmCloseModal()) {
-      event.preventDefault(); // Evitar que el modal se cierre
-      const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
-      pedidoModal.show(); // Vuelve a mostrar el modal si se cancela
-    }
-  });
-
-  footerCloseButton.addEventListener('click', function(event) {
-    if (!confirmCloseModal()) {
-      event.preventDefault(); // Evitar que el modal se cierre
-    } else {
-      const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
-      pedidoModal.hide(); // Cerrar el modal si se confirma
-    }
-  });
-  </script>
-
+  <script src="datos.js"></script>
+  <script src="bd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBFTypg5rh1dzt8fxmiA03UhKR8Uf3KA6Q",
+      authDomain: "tienda-c69be.firebaseapp.com",
+      projectId: "tienda-c69be",
+      storageBucket: "tienda-c69be.appspot.com",
+      messagingSenderId: "771742316743",
+      appId: "1:771742316743:web:2dd6d3822adc6f09b626e2"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+</script>
+
+<script>
+    // Verificar la conexión leyendo datos
+    async function verificarConexion() {
+    try {
+        const snapshot = await db.collection('pedidos').get();
+        if (snapshot.empty) {
+            console.log('No hay documentos en la colección "pedidos".');
+        } else {
+            snapshot.forEach(doc => {
+                console.log(doc.id, '=>', doc.data());
+            });
+        }
+    } catch (error) {
+        console.error('Error al acceder a Firestore: ', error);
+    }
+    }
+
+    // Llamar a la función de verificación
+    verificarConexion();
+</script>
+
+
 </html>

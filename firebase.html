@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda en Línea</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script type="module">
+        // Importar las funciones necesarias de Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBFTypg5rh1dzt8fxmiA03UhKR8Uf3KA6Q",
+            authDomain: "tienda-c69be.firebaseapp.com",
+            projectId: "tienda-c69be",
+            storageBucket: "tienda-c69be.appspot.com",
+            messagingSenderId: "771742316743",
+            appId: "1:771742316743:web:2dd6d3822adc6f09b626e2"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app); // Definir db aquí
+
+        // Función para insertar datos
+        async function insertarDatos(nombre, telefono, total) {
+            try {
+                const docRef = await addDoc(collection(db, "productos"), {
+                    nombre: nombre,
+                    telefono: telefono,
+                    total: total,
+                });
+                console.log("Documento escrito con ID: ", docRef.id);
+                alert("Datos insertados correctamente");
+            } catch (e) {
+                console.error("Error al añadir documento: ", e);
+                alert("Error al insertar datos");
+            }
+        }
+
+        // Llama a la función con los datos que deseas insertar
+        window.onload = function() {
+            insertarDatos("Juan Pérez", "123456789", 50000);
+        };
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Tienda en Línea</h1>
+    </div>
+</body>
+</html>
