@@ -207,7 +207,7 @@ document.getElementById('guardarDatosButton').addEventListener('click', async fu
 });
 
 // Confirmar cierre del modal de resumen
-const closeModalButton = document.getElementById('closeModalButton');
+
 const botonEnviarPedido = document.getElementById('botonEnviarPedido');
 
 function confirmCloseModal() {
@@ -217,19 +217,25 @@ function confirmCloseModal() {
   return confirmClose;
 }
 
+// Confirmar cierre del modal de resumen
+const closeModalButton = document.getElementById('closeModalButton');
+
+// Función para confirmar el cierre
 function confirmCloseModal2() {
-  const confirmClose = confirm("¿Estás seguro de que quieres cerrar el resumen del pedido?");
-  const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
-  pedidoModal.hide(); // Cerrar el modal si se confirma
-  return confirmClose;
+  return confirm("¿Estás seguro de que quieres cerrar el resumen del pedido?");
 }
 
-
+// Manejar el evento 'click' del botón de cerrar
 closeModalButton.addEventListener('click', function(event) {
   if (!confirmCloseModal2()) {
-    event.preventDefault(); // Evitar que el modal se cierre
+    // Si el usuario selecciona "No", evitar que el modal se cierre
+    event.preventDefault();
     const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
-    pedidoModal.show(); // Volver a mostrar el modal si se cancela
+    pedidoModal.show(); // Asegurar que el modal se mantenga abierto
+  } else {
+    // Si el usuario selecciona "Sí", cerrar el modal
+    const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
+    pedidoModal.hide(); // Cerrar el modal
   }
 });
 
