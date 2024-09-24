@@ -31,10 +31,11 @@
         const db = getFirestore(app);
 
         // Función para insertar datos
-        async function insertarDatos(nombre, direccion, telefono, total, ids) {
+        async function insertarDatos(nombre, direccion, telefono, total, ids , identificador) {
             try {
                 const docRef = await addDoc(collection(db, "productos"), {
                     nombre: nombre,
+                    identificador, identificador,
                     direccion: direccion,
                     telefono: telefono,
                     total: total,
@@ -71,8 +72,11 @@
                 let idsProductos = Object.keys(productosSeleccionados).map(id => parseInt(id, 10)); // Convierte a entero
                 console.log(idsProductos); // Esto imprimirá un array con los IDs, por ejemplo: [1, 2]
 
+                const idAleatorio = Math.floor(Math.random() * 1000) + 1;
+
+
                 // Insertar datos en Firebase
-                await insertarDatos(nombre, direccion, telefono, totalCosto,idsProductos); // Aquí se utiliza totalCosto importado
+                await insertarDatos(nombre, direccion, telefono, totalCosto,idsProductos,idAleatorio); // Aquí se utiliza totalCosto importado
 
                 // Cerrar el modal
                 const datosModal = bootstrap.Modal.getInstance(document.getElementById('datosModal'));
