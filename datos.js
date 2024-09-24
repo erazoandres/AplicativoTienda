@@ -177,7 +177,7 @@ document.getElementById('guardarDatosButton').addEventListener('click', async fu
 
 
 // Agregar el idAleatorio al resumen
-resumenTexto += `\nID Pedido: ${idAleatorio}`;
+resumenTexto += `\nID Pedido: ${ window.idAleatorio}`;
 
 // Agregar el costo total al resumen
 resumenTexto += `\nCosto Total: $${totalCosto}`;

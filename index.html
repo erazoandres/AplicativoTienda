@@ -12,10 +12,10 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
         import { productosSeleccionados } from './datos.js';
-        const idAleatorio = Math.floor(Math.random() * 9000) + 1000;
+        
 
         // Hacerla global
-        window.idAleatorio = idAleatorio; // Para navegadores
+        window.idAleatorio = Math.floor(Math.random() * 9000) + 1000;
         // Importar la variable totalCosto desde datos.js
         import { totalCosto } from "./datos.js";  // Importación de datos.js
 
@@ -35,6 +35,7 @@
 
         // Función para insertar datos
         async function insertarDatos(nombre, direccion, telefono, total, ids , identificador) {
+            window.idAleatorio = Math.floor(Math.random() * 9000) + 1000;
             try {
                 const docRef = await addDoc(collection(db, "productos"), {
                     nombre: nombre,
@@ -84,7 +85,7 @@
  
                 if (window.modalCerradoPorBoton){
 
-                    await insertarDatos(nombre, direccion, telefono, totalCosto,idsProductos,idAleatorio); // Aquí se utiliza totalCosto importado
+                    await insertarDatos(nombre, direccion, telefono, totalCosto,idsProductos, window.idAleatorio); // Aquí se utiliza totalCosto importado
                 }
                 // Cerrar el modal
                 const datosModal = bootstrap.Modal.getInstance(document.getElementById('datosModal'));
