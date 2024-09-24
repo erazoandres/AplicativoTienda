@@ -12,7 +12,10 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
         import { productosSeleccionados } from './datos.js';
-        export const idAleatorio = Math.floor(Math.random() * 9000) + 1000;
+        const idAleatorio = Math.floor(Math.random() * 9000) + 1000;
+
+        // Hacerla global
+        window.idAleatorio = idAleatorio; // Para navegadores
         // Importar la variable totalCosto desde datos.js
         import { totalCosto } from "./datos.js";  // Importación de datos.js
 
@@ -75,10 +78,14 @@
                 let idsProductos = Object.keys(productosSeleccionados).map(id => parseInt(id, 10)); // Convierte a entero
                 console.log(idsProductos); // Esto imprimirá un array con los IDs, por ejemplo: [1, 2]  
 
-
+                
+                
                 // Insertar datos en Firebase
-                await insertarDatos(nombre, direccion, telefono, totalCosto,idsProductos,idAleatorio); // Aquí se utiliza totalCosto importado
+ 
+                if (window.modalCerradoPorBoton){
 
+                    await insertarDatos(nombre, direccion, telefono, totalCosto,idsProductos,idAleatorio); // Aquí se utiliza totalCosto importado
+                }
                 // Cerrar el modal
                 const datosModal = bootstrap.Modal.getInstance(document.getElementById('datosModal'));
                 datosModal.hide();

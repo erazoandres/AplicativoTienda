@@ -1,11 +1,16 @@
 
 // datos.js
-export let totalCosto = 0; // Variable para almacenar el costo total
 
+
+// Variable para almacenar el costo total
+export let totalCosto = 0; 
+
+// Función para actualizar el total
 export function actualizarTotal(nuevoTotal) {
-  totalCosto = nuevoTotal; // Función para actualizar el total
+  totalCosto = nuevoTotal; 
 }
 
+//Basde de datas de prueba *Array*.
 export const productos = [
   { id: 1, nombre: "Café Colombiano", precio: "$8000", descripcion: "Café premium de origen colombiano.", categoria: "Bebidas", imagen: "https://via.placeholder.com/150" },
   { id: 2, nombre: "Arequipe", precio: "$5500", descripcion: "Delicioso dulce de leche, ideal para untar.", categoria: "Dulces", imagen: "https://via.placeholder.com/150" },
@@ -30,7 +35,11 @@ export const productos = [
 ];
 
 
-export let productosSeleccionados = {}; // Objeto para almacenar productos seleccionados
+window.modalCerradoPorBoton = false
+
+
+// Objeto para almacenar productos seleccionados
+export let productosSeleccionados = {}; 
 
 // Función para generar el HTML de cada producto
 function generarProductoHTML(producto) {
@@ -81,35 +90,7 @@ function mostrarProductos(productosFiltrados) {
   });
 
 
-  document.getElementById('guardarDatosButton').addEventListener('click', async function() {
-    // Obtener los valores de los inputs del formulario
-    const nombre = document.getElementById('nombreInput').value;
-    const direccion = document.getElementById('direccionInput').value;
-    const telefono = document.getElementById('telefonoInput').value;
 
-    // Validar que los campos no estén vacíos
-    if (!nombre || !direccion || !telefono) {
-        alert("Todos los campos son obligatorios. Intenta de nuevo.");
-        return; // Salir de la función si algún campo está vacío
-    }
-
-    let idsProductos = Object.keys(productosSeleccionados).map(id => parseInt(id, 10)); // Convierte a entero
-    console.log(idsProductos); // Esto imprimirá un array con los IDs, por ejemplo: [1, 2]
-
-
-
-
-    // Insertar datos en Firebase
-    await insertarDatos(nombre, direccion, telefono, totalCosto,idsProductos,idAleatorio); // Aquí se utiliza totalCosto importado
-
-    // Cerrar el modal
-    const datosModal = bootstrap.Modal.getInstance(document.getElementById('datosModal'));
-    datosModal.hide();
-
-
-    // Limpiar los campos del formulario
-    document.getElementById('datosForm').reset();
-  });
 
   //BOTON DE INCREMENT0
   document.querySelectorAll('.producto').forEach(producto => {
@@ -159,7 +140,7 @@ document.getElementById('productSearch').addEventListener('input', function() {
 });
 
 
-  // Guardar los datos del cliente y luego mostrar el resumen del pedido
+// Guardar los datos del cliente y luego mostrar el resumen del pedido
 document.getElementById('guardarDatosButton').addEventListener('click', async function() {
   // Obtener los valores de los inputs del formulario
   const nombre = document.getElementById('nombreInput').value;
@@ -195,8 +176,12 @@ document.getElementById('guardarDatosButton').addEventListener('click', async fu
   }
 
 
-  //resumenTexto += `\n + $${idAleatorio}`
-  resumenTexto += `\nCosto Total: $${totalCosto}`;
+// Agregar el idAleatorio al resumen
+resumenTexto += `\nID Pedido: ${idAleatorio}`;
+
+// Agregar el costo total al resumen
+resumenTexto += `\nCosto Total: $${totalCosto}`;
+
 
   // Mostrar el resumen en el modal
   document.getElementById('resumenPedido').textContent = resumenTexto;
@@ -206,8 +191,8 @@ document.getElementById('guardarDatosButton').addEventListener('click', async fu
   pedidoModal.show();
 });
 
-// Confirmar cierre del modal de resumen
 
+// Confirmar cierre del modal de resumen
 const botonEnviarPedido = document.getElementById('botonEnviarPedido');
 
 function confirmCloseModal() {
@@ -220,9 +205,12 @@ function confirmCloseModal() {
 // Confirmar cierre del modal de resumen
 const closeModalButton = document.getElementById('closeModalButton');
 
+
+
 // Función para confirmar el cierre
 function confirmCloseModal2() {
-  return confirm("¿Estás seguro de que quieres cerrar el resumen del pedido?");
+  modalCerradoPorBoton = true;
+  return confirm("¿Estás seguro de que quieres cerrar el resumen del pedido?\n PEDIDO NO SE REGISTRARA");
 }
 
 // Manejar el evento 'click' del botón de cerrar
@@ -234,20 +222,23 @@ closeModalButton.addEventListener('click', function(event) {
     pedidoModal.show(); // Asegurar que el modal se mantenga abierto
   } else {
     // Si el usuario selecciona "Sí", cerrar el modal
+    window.modalCerradoPorBoton = true;
     const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
     pedidoModal.hide(); // Cerrar el modal
   }
 });
 
+//Manejo y lanzamiento del envio de la informacion
 botonEnviarPedido.addEventListener('click', function(event) {
   if (!confirmCloseModal()) {
     event.preventDefault(); // Evitar que el modal se cierre
   } else {
+    window.modalCerradoPorBoton = true
     const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
     pedidoModal.hide(); // Cerrar el modal si se confirma
   }
 });
 
 
-// Mostrar productos al cargar la página
+// Inicializar y Mostrar productos al cargar la página
 mostrarProductos(productos);
