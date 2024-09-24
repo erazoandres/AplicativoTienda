@@ -39,7 +39,7 @@
                     total: total,
                 });
                 console.log("Documento escrito con ID: ", docRef.id);
-                alert("Datos insertados correctamente");
+                alert("Pedido registrado, porfavor envia el ID a el asesor por Whatsapp");
             } catch (e) {
                 console.error("Error al añadir documento: ", e);
                 alert("Error al insertar datos");
@@ -104,7 +104,7 @@
 
         <!-- Buscador -->
         <div class="row mb-4">
-            <div class="col-md-6 offset-md-3">
+            <div class="col-md-6 ">
                 <input type="text" id="productSearch" class="form-control" placeholder="Buscar productos...">
             </div>
         </div>
@@ -140,7 +140,7 @@
                     <pre id="resumenPedido"></pre>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="footerCloseButton">Cerrar</button>
+                    <button type="button" class="btn btn-danger " id="footerCloseButton">Cerrar</button>
                     
                 </div>
             </div>
@@ -174,7 +174,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary" id="guardarDatosButton">Guardar</button>
-                </div>
+                </div>  
             </div>
         </div>
     </div>

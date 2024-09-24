@@ -12,7 +12,7 @@ export const productos = [
   { id: 3, nombre: "Té Verde", precio: "$7000", descripcion: "Té verde orgánico, excelente para la salud.", categoria: "Bebidas", imagen: "https://via.placeholder.com/150" },
   { id: 4, nombre: "Chocolate Amargo", precio: "$10000", descripcion: "Chocolate oscuro con 70% de cacao.", categoria: "Dulces", imagen: "https://via.placeholder.com/150" },
   { id: 5, nombre: "Mermelada de Fresa", precio: "$4500", descripcion: "Mermelada casera de fresas frescas.", categoria: "Dulces", imagen: "https://via.placeholder.com/150" },
-  { id: 6, nombre: "Pan Artesanal", precio: "$3000", descripcion: "Pan hecho a mano con ingredientes naturales.", categoria: "Panadería", imagen: "https://via.placeholder.com/150" },
+  { id: 6, nombre: "Pan Artesanal", precio: "$3000", descripcion: "Pan hecho a mano con ingitgredientes naturales.", categoria: "Panadería", imagen: "https://via.placeholder.com/150" },
   { id: 7, nombre: "Queso Manchego", precio: "$12000", descripcion: "Queso español de sabor intenso y textura firme.", categoria: "Lácteos", imagen: "https://via.placeholder.com/150" },
   { id: 8, nombre: "Yogur Griego", precio: "$6500", descripcion: "Yogur espeso y cremoso, alto en proteínas.", categoria: "Lácteos", imagen: "https://via.placeholder.com/150" },
   { id: 9, nombre: "Galletas de Avena", precio: "$3500", descripcion: "Galletas saludables de avena y miel.", categoria: "Dulces", imagen: "https://via.placeholder.com/150" },

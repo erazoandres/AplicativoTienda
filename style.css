@@ -19,24 +19,48 @@
   font-size: 12px;
   display: none;
 }
-
 .card {
   width: 100%;
-  max-width: 260px; /* Ancho más compacto */
-  max-height: 70%; /* Menor altura máxima */
-  position: relative;
-  margin: 5px; /* Reducir margen */
-  border: 1px solid #ccc; /* Color más suave para el borde */
-  border-radius: 8px; /* Borde ligeramente más redondeado */
+  max-width: 220px; /* Más compacta en ancho */
+  margin: 6px; /* Menor margen */
+  border: 1px solid #ddd; /* Borde más ligero */
+  border-radius: 8px; /* Bordes ligeramente redondeados */
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra más suave y moderna */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Suavizar transiciones */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px); /* Efecto de flotación al hacer hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada en hover */
+  transform: translateY(-3px); /* Elevación ligera en hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más fuerte en hover */
 }
+
+.card img {
+  max-height: 120px; /* Imagen más compacta verticalmente */
+  object-fit: cover; /* Para asegurar que la imagen cubra el espacio */
+}
+
+.card-body {
+  padding: 8px; /* Menor padding para ahorrar espacio */
+}
+
+.card-title {
+  font-size: 0.9rem; /* Texto más pequeño */
+  margin-bottom: 4px;
+}
+
+.card-text {
+  font-size: 0.85rem; /* Texto aún más compacto */
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.card-price {
+  font-weight: bold;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
 
 .quantity-controls {
   display: none; 
@@ -46,10 +70,6 @@
 }
 .quantity-controls button {
   margin: 0 5px;
-}
-
-.modal-footer{
-  background-color: red;
 }
 
 .quantity-controls button:first-child {
