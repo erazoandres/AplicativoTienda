@@ -30,7 +30,7 @@ export const productos = [
 ];
 
 
-let productosSeleccionados = {}; // Objeto para almacenar productos seleccionados
+export let productosSeleccionados = {}; // Objeto para almacenar productos seleccionados
 
 // Función para generar el HTML de cada producto
 function generarProductoHTML(producto) {
