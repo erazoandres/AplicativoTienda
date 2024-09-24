@@ -12,7 +12,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
         import { productosSeleccionados } from './datos.js';
-        
+        export const idAleatorio = Math.floor(Math.random() * 9000) + 1000;
         // Importar la variable totalCosto desde datos.js
         import { totalCosto } from "./datos.js";  // Importación de datos.js
 
@@ -57,7 +57,7 @@
                 datosModal.show();
             });
 
-            document.getElementById('guardarDatosButton').addEventListener('click', async function() {
+            document.getElementById('botonEnviarPedido').addEventListener('click', async function() {
                 // Obtener los valores de los inputs del formulario
                 const nombre = document.getElementById('nombreInput').value;
                 const direccion = document.getElementById('direccionInput').value;
@@ -70,9 +70,7 @@
                 }
 
                 let idsProductos = Object.keys(productosSeleccionados).map(id => parseInt(id, 10)); // Convierte a entero
-                console.log(idsProductos); // Esto imprimirá un array con los IDs, por ejemplo: [1, 2]
-
-                const idAleatorio = Math.floor(Math.random() * 9000) + 1000;
+                console.log(idsProductos); // Esto imprimirá un array con los IDs, por ejemplo: [1, 2]  
 
 
                 // Insertar datos en Firebase
@@ -87,6 +85,9 @@
             });
         };
     </script>
+
+
+
 </head>
 <body>
 
@@ -149,7 +150,7 @@
                     <pre id="resumenPedido"></pre>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger " id="footerCloseButton">Cerrar</button>
+                    <button type="button" class="btn btn-success" id="botonEnviarPedido"> Enviar Pedido</button>
                     
                 </div>
             </div>

@@ -80,6 +80,38 @@ function mostrarProductos(productosFiltrados) {
     });
   });
 
+
+  document.getElementById('guardarDatosButton').addEventListener('click', async function() {
+    // Obtener los valores de los inputs del formulario
+    const nombre = document.getElementById('nombreInput').value;
+    const direccion = document.getElementById('direccionInput').value;
+    const telefono = document.getElementById('telefonoInput').value;
+
+    // Validar que los campos no estén vacíos
+    if (!nombre || !direccion || !telefono) {
+        alert("Todos los campos son obligatorios. Intenta de nuevo.");
+        return; // Salir de la función si algún campo está vacío
+    }
+
+    let idsProductos = Object.keys(productosSeleccionados).map(id => parseInt(id, 10)); // Convierte a entero
+    console.log(idsProductos); // Esto imprimirá un array con los IDs, por ejemplo: [1, 2]
+
+
+
+
+    // Insertar datos en Firebase
+    await insertarDatos(nombre, direccion, telefono, totalCosto,idsProductos,idAleatorio); // Aquí se utiliza totalCosto importado
+
+    // Cerrar el modal
+    const datosModal = bootstrap.Modal.getInstance(document.getElementById('datosModal'));
+    datosModal.hide();
+
+
+    // Limpiar los campos del formulario
+    document.getElementById('datosForm').reset();
+  });
+
+  //BOTON DE INCREMENT0
   document.querySelectorAll('.producto').forEach(producto => {
     producto.querySelector('.btn-increment').addEventListener('click', function(event) {
       event.stopPropagation();
@@ -92,6 +124,7 @@ function mostrarProductos(productosFiltrados) {
       }
     });
 
+    //BOTON DE DECREMENTO
     producto.querySelector('.btn-decrement').addEventListener('click', function(event) {
       event.stopPropagation();
       const productId = parseInt(producto.getAttribute('data-id'));
@@ -117,8 +150,6 @@ function actualizarCarrito() {
   document.getElementById('cartCount').textContent = totalProductos;
 }
 
-// Mostrar productos al cargar la página
-mostrarProductos(productos);
 
 // Filtrar productos por búsqueda
 document.getElementById('productSearch').addEventListener('input', function() {
@@ -126,8 +157,6 @@ document.getElementById('productSearch').addEventListener('input', function() {
   const productosFiltrados = productos.filter(producto => producto.nombre.toLowerCase().includes(searchTerm));
   mostrarProductos(productosFiltrados);
 });
-
-
 
 
   // Guardar los datos del cliente y luego mostrar el resumen del pedido
@@ -165,6 +194,8 @@ document.getElementById('guardarDatosButton').addEventListener('click', async fu
     }
   }
 
+
+  //resumenTexto += `\n + $${idAleatorio}`
   resumenTexto += `\nCosto Total: $${totalCosto}`;
 
   // Mostrar el resumen en el modal
@@ -177,24 +208,32 @@ document.getElementById('guardarDatosButton').addEventListener('click', async fu
 
 // Confirmar cierre del modal de resumen
 const closeModalButton = document.getElementById('closeModalButton');
-const footerCloseButton = document.getElementById('footerCloseButton');
+const botonEnviarPedido = document.getElementById('botonEnviarPedido');
 
 function confirmCloseModal() {
+  const confirmClose = confirm("¿Enviamos pedido?");
+  const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
+  pedidoModal.hide(); // Cerrar el modal si se confirma
+  return confirmClose;
+}
+
+function confirmCloseModal2() {
   const confirmClose = confirm("¿Estás seguro de que quieres cerrar el resumen del pedido?");
   const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
   pedidoModal.hide(); // Cerrar el modal si se confirma
   return confirmClose;
 }
 
+
 closeModalButton.addEventListener('click', function(event) {
-  if (!confirmCloseModal()) {
+  if (!confirmCloseModal2()) {
     event.preventDefault(); // Evitar que el modal se cierre
     const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
     pedidoModal.show(); // Volver a mostrar el modal si se cancela
   }
 });
 
-footerCloseButton.addEventListener('click', function(event) {
+botonEnviarPedido.addEventListener('click', function(event) {
   if (!confirmCloseModal()) {
     event.preventDefault(); // Evitar que el modal se cierre
   } else {
@@ -204,3 +243,5 @@ footerCloseButton.addEventListener('click', function(event) {
 });
 
 
+// Mostrar productos al cargar la página
+mostrarProductos(productos);
