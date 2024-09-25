@@ -206,6 +206,7 @@
             document.getElementById('productoIdentificador').textContent = productData.identificador;
             document.getElementById('productoNombre').textContent = productData.nombre || 'N/A';
             document.getElementById('productoPrecio').textContent = productData.precio || 'N/A';
+            document.getElementById('productoIds').textContent = idsArray.join(', ');
 
             // Mostrar las tarjetas
             const cardContainer = document.getElementById('cardContainer');

@@ -1,0 +1,15 @@
+[33md27ed9f[m[33m ([m[1;36mHEAD[m[33m)[m Detalles de pedido ya se puede consultar
+[33m8d33d4d[m Login y consulta de identificados funcionando
+[33m008cc5d[m Reparado error de ID PEDIDO
+[33m2d7fe6e[m Error de alertas reparado , V1.5
+[33m9b268bc[m Version con mejoras en modales, y falta arreglar que no se envie al cancelar el form con la x
+[33m6bd4240[m Version con mejoras en modales
+[33mc501d74[m Agregado identificados de 4 digitos
+[33mb53014d[m Agregado Identificador uunico de pedido
+[33m30b7358[m Indices de productos agregados a cada pedido
+[33m232b85f[m Corecciones aplicadas
+[33m778cc9f[m Version beta
+[33m33c5c4e[m Version 1 funcional aun sin registrar todos los datos
+[33m61e114a[m probando base de datos, ya esta funciona
+[33ma4cdfd3[m Enviando datos al servidor
+[33mcce5cd0[m first commit
