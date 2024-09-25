@@ -9,8 +9,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
-/* General Layout */
-body {
+  /* General Layout */
+  body {
   height: 100vh;
   display: flex;
   align-items: center;
@@ -19,204 +19,221 @@ body {
   background: linear-gradient(135deg, #4A90E2, #50E3C2); /* Gradiente de fondo */
   margin: 0; /* Eliminar márgenes en móviles */
   padding: 0;
-}
+  }
 
-/* Sección de Código */
-.code-section {
+  /* Sección de Código */
+  .code-section {
   margin-top: 5%;
   padding-top: 1.5rem;
   display: none; /* Oculto por defecto */
-}
+  }
 
-/* Formularios y Contenedores Generales */
-.login-form, .code-form, .card-container {
+  /* Formularios y Contenedores Generales */
+  .login-form, .code-form, .card-container {
   background-color: white;
   padding: 1.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-}
+  }
 
-/* Contenedor de Tarjetas */
-.card-container {
+  /* Contenedor de Tarjetas */
+  .card-container {
   max-height: 600px;
   overflow-y: auto;
-}
+  }
 
-/* Título con Fondo Transparente */
-#title3Last {
+  /* Título con Fondo Transparente */
+  #title3Last {
   background-color: rgba(255, 255, 255, 0.85);
   padding: 1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   max-height: 400px;
   overflow-y: auto;
-}
+  }
 
-#title3Last h4 {
+  #title3Last h4 {
   padding-top: 10%;
   margin-top: 10%;
-}
+  }
 
-/* Hover en Lista */
-ul li:hover {
+  /* Hover en Lista */
+  ul li:hover {
   background-color: #4A90E2;
   transition: 0.4s ease;
   cursor: default;
   color: white;
-}
+  }
 
-/* Inputs de Formularios */
-.form-control {
+  /* Inputs de Formularios */
+  .form-control {
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
-}
+  }
 
-.form-control:focus {
+  .form-control:focus {
   box-shadow: none;
   border-color: #50E3C2;
-}
+  }
 
-/* Botones */
-button.btn-primary {
+  /* Para Chrome, Safari, Edge, Opera */
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Para Firefox */
+  input[type=number] {
+      -moz-appearance: textfield;
+  }
+
+
+  #container-login-form{
+    gap: 20px;
+  }
+
+  /* Botones */
+  button.btn-primary {
   background-color: #50E3C2;
   border-color: #50E3C2;
   transition: background-color 0.3s ease;
-}
+  }
 
-button.btn-primary:hover {
+  button.btn-primary:hover {
   background-color: #3BB197;
-}
+  }
 
-/* Sección de Tarjetas */
-.cards-section {
+  /* Sección de Tarjetas */
+  .cards-section {
   margin-top: 2rem;
   display: none; /* Oculto por defecto */
-}
+  }
 
-/* Ajustes de Contenedores Generales */
-.container {
+  /* Ajustes de Contenedores Generales */
+  .container {
   max-width: 1200px;
   width: 100%; /* Asegura que ocupe todo el ancho disponible en móviles */
   padding: 0 15px; /* Espaciado interno para móviles */
-}
+  }
 
-/* Secciones (Login, Código, Tarjetas) */
-.login-section, .code-section, .cards-section {
+  /* Secciones (Login, Código, Tarjetas) */
+  .login-section, .code-section, .cards-section {
   background-color: white;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+  }
 
-.login-section:hover, .code-section:hover, .cards-section:hover {
+  .login-section:hover, .code-section:hover, .cards-section:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
+  }
 
-/* Títulos */
-h3, h4 {
+  /* Títulos */
+  h3, h4 {
   font-weight: bold;
   color: #333;
   text-align: center; /* Centrar los títulos en pantallas más pequeñas */
-}
+  }
 
-/* Tarjetas */
-.card {
+  /* Tarjetas */
+  .card {
   border: none;
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-}
+  }
 
-.card:hover {
+  .card:hover {
   background-color: #B0E2FF;
   transform: scale(1.05);
   transition: 0.5s ease;
-}
+  }
 
-.card-body {
+  .card-body {
   padding: 1.5rem;
-}
+  }
 
-/* Icono de Verificación en Tarjetas */
-.check-icon {
+  /* Icono de Verificación en Tarjetas */
+  .check-icon {
   position: absolute;
   top: 10px;
   right: 10px;
   color: green;
   display: none; /* Oculto por defecto */
-}
+  }
 
-/* Imágenes en Tarjetas */
-.card-img-top {
+  /* Imágenes en Tarjetas */
+  .card-img-top {
   width: 100%;
   height: auto;
   max-height: 150px;
   object-fit: cover;
-}
+  }
 
-/* Media Queries para Móviles */
-@media (max-width: 768px) {
+  /* Media Queries para Móviles */
+  @media (max-width: 768px) {
   body {
-    height: auto; /* Permitir que el cuerpo crezca según el contenido */
-    flex-direction: column; /* Ajuste a una columna para pantallas pequeñas */
-    justify-content: flex-start;
+  height: auto; /* Permitir que el cuerpo crezca según el contenido */
+  flex-direction: column; /* Ajuste a una columna para pantallas pequeñas */
+  justify-content: flex-start;
   }
 
   .container {
-    max-width: 100%; /* Ocupa todo el ancho en pantallas móviles */
-    padding: 0 10px; /* Reducir el padding en móviles */
+  max-width: 100%; /* Ocupa todo el ancho en pantallas móviles */
+  padding: 0 10px; /* Reducir el padding en móviles */
   }
 
   .login-section, .code-section, .cards-section {
-    padding: 1rem; /* Reducir el padding interno en móviles */
-    box-shadow: none; /* Eliminar sombras para reducir peso visual */
+  padding: 1rem; /* Reducir el padding interno en móviles */
+  box-shadow: none; /* Eliminar sombras para reducir peso visual */
   }
 
   .login-form, .code-form, .card-container {
-    padding: 1rem; /* Reducir padding en formularios */
+  padding: 1rem; /* Reducir padding en formularios */
   }
 
   h3, h4 {
-    font-size: 1.2rem; /* Ajustar tamaño de fuente para móviles */
+  font-size: 1.2rem; /* Ajustar tamaño de fuente para móviles */
   }
 
-/* Estilos para el contenedor de las tarjetas */
-.card-container {
+  /* Estilos para el contenedor de las tarjetas */
+  .card-container {
   display: grid; /* Cambiamos a un sistema de cuadrícula */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustar el tamaño de las columnas automáticamente */
   gap: 1.5rem; /* Espacio entre las tarjetas */
   max-height: 600px;
   overflow-y: auto;
   padding: 1rem;
-}
+  }
 
-/* Media Queries para pantallas pequeñas */
-@media (max-width: 768px) {
+  /* Media Queries para pantallas pequeñas */
+  @media (max-width: 768px) {
   .card-container {
-    grid-template-columns: repeat(3, 1fr); /* Mostramos 3 columnas cuando el ancho de pantalla es menor a 768px */
+  grid-template-columns: repeat(3, 1fr); /* Mostramos 3 columnas cuando el ancho de pantalla es menor a 768px */
   }
 
   .card {
-    padding: 0.5rem; /* Reducimos el padding en las tarjetas */
+  padding: 0.5rem; /* Reducimos el padding en las tarjetas */
   }
 
   .card-body {
-    font-size: 0.9rem; /* Ajustamos el tamaño de la fuente para que todo encaje mejor */
+  font-size: 0.9rem; /* Ajustamos el tamaño de la fuente para que todo encaje mejor */
   }
 
   .card-img-top {
-    height: 100px; /* Reducimos el tamaño de las imágenes en pantallas pequeñas */
+  height: 100px; /* Reducimos el tamaño de las imágenes en pantallas pequeñas */
   }
-}
+  }
 
 
-button.btn-primary {
-    width: 100%; /* Botones ocupan todo el ancho en móviles */
+  button.btn-primary {
+  width: 100%; /* Botones ocupan todo el ancho en móviles */
   }
-}
+  }
 
 
 
@@ -224,10 +241,10 @@ button.btn-primary {
 </head>
 <body>
 
-  <div class="container">
-    <div class="row justify-content-center">
+  <div class="container ">
+    <div class="row d-flex justify-content-center " id = "container-login-form">
       <!-- Sección de Login -->
-      <div class="col-md-4 login-section">
+      <div class="col-md-3 login-section">
         <div class="login-form">
           <h4 class="text-center mb-2">Iniciar Sesión</h4>
           <form id="loginForm">
@@ -340,12 +357,10 @@ button.btn-primary {
           ulIdentificadores.appendChild(li);
         }
 
- 
       } catch (error) {
         console.error("Error al obtener los últimos identificadores: ", error);
       }
     }
-
 
     // Lógica de inicio de sesión
     document.getElementById('loginForm').addEventListener('submit', function(event) {
@@ -358,19 +373,16 @@ button.btn-primary {
       const validEmail = "admin@ejemplo.com";
       const validPassword = "123456";
 
-
       // Validación de las credenciales
       if (emailInput.value === validEmail && passwordInput.value === validPassword) {
         // Si las credenciales son correctas, mostrar la sección de código
         document.querySelector('.login-section').style.display = 'none';
         document.querySelector('.code-section').style.display = 'block';
-    
+
         document.getElementById('title3Last').style.display = 'block';
-      
-      
-        
 
 
+        document.querySelector('.login-section').style.display = 'none';
 
         // Llama a la función al cargar la página
         obtenerUltimosIdentificadores();
@@ -389,14 +401,11 @@ button.btn-primary {
       // Verificar que el código tenga exactamente 4 cifras
       if (codeValue.length !== 4 || isNaN(codeValue)) {
         codeInput.classList.add('is-invalid');
-        
-        
       } else {
         codeInput.classList.remove('is-invalid');
 
         try {
           // Consultar Firebase para buscar el código en la colección "productos"
-          
           const querySnapshot = await getDocs(collection(db, "productos"));
           let found = false;
           let idsArray = []; // Array para almacenar el campo "ids"
@@ -436,20 +445,19 @@ button.btn-primary {
             cardContainer.innerHTML = ''; // Limpiar el contenedor
 
             idsArray.forEach(id => {
-                const idCard = `
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4"> <!-- Diseño responsivo: 3 productos en pantallas grandes, 2 en medianas, 1 en pequeñas -->
-                    <div class="card">
-                        <img src="licor.png" class="card-img-top" alt="Imagen del producto">
-                        <div class="check-icon" id="check-${id}"><i class="bi bi-check-circle-fill"></i></div>
-                        <div class="card-body" >
-                        <h5 class="card-title">ID: ${id}</h5>
-                       
-                        <input type="checkbox" class="form-check-input" id="check-${id}-input">
-                        </div>
+              const idCard = `
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4"> <!-- Diseño responsivo: 3 productos en pantallas grandes, 2 en medianas, 1 en pequeñas -->
+                  <div class="card">
+                    <img src="licor.png" class="card-img-top" alt="Imagen del producto">
+                    <div class="check-icon" id="check-${id}"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="card-body">
+                      <h5 class="card-title">ID: ${id}</h5>
+                      <input type="checkbox" class="form-check-input" id="check-${id}-input">
                     </div>
-                    </div>
-                `;
-                cardContainer.innerHTML += idCard; // Agregar la tarjeta al contenedor
+                  </div>
+                </div>
+              `;
+              cardContainer.innerHTML += idCard; // Agregar la tarjeta al contenedor
             });
 
             // Agregar evento a cada checkbox
@@ -472,6 +480,7 @@ button.btn-primary {
         }
       }
     });
+
   </script>
 
 </body>
