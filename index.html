@@ -9,185 +9,215 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
-    body {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: linear-gradient(135deg, #4A90E2, #50E3C2); /* Gradiente mejorado */
-
-
-
-
-  /* Sección de código */
-  .code-section {
-    margin-top: 5%;
-    padding-top: 1.5rem;
-  }
-
-  .login-form, .code-form, .card-container {
-    background-color: white;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  }
-
-  .card-container {
-      max-height: 600px;
-      overflow-y: auto;
-  }
-
-  #title3Last {
-    background-color: rgba(255, 255, 255, 0.85);
-    padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    height: auto; /* Asegúrate de que el contenedor ajuste su altura al contenido */
-    max-height: 400px; /* Máxima altura si deseas limitarlo */
-    overflow-y: auto; /* Permitir scroll si el contenido excede la altura */
+/* General Layout */
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #4A90E2, #50E3C2); /* Gradiente de fondo */
+  margin: 0; /* Eliminar márgenes en móviles */
+  padding: 0;
 }
 
-  #title3Last h4{
-      padding-top: 10%;
-      margin-top: 10%;
+/* Sección de Código */
+.code-section {
+  margin-top: 5%;
+  padding-top: 1.5rem;
+  display: none; /* Oculto por defecto */
+}
+
+/* Formularios y Contenedores Generales */
+.login-form, .code-form, .card-container {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Contenedor de Tarjetas */
+.card-container {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+/* Título con Fondo Transparente */
+#title3Last {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+#title3Last h4 {
+  padding-top: 10%;
+  margin-top: 10%;
+}
+
+/* Hover en Lista */
+ul li:hover {
+  background-color: #4A90E2;
+  transition: 0.4s ease;
+  cursor: default;
+  color: white;
+}
+
+/* Inputs de Formularios */
+.form-control {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #50E3C2;
+}
+
+/* Botones */
+button.btn-primary {
+  background-color: #50E3C2;
+  border-color: #50E3C2;
+  transition: background-color 0.3s ease;
+}
+
+button.btn-primary:hover {
+  background-color: #3BB197;
+}
+
+/* Sección de Tarjetas */
+.cards-section {
+  margin-top: 2rem;
+  display: none; /* Oculto por defecto */
+}
+
+/* Ajustes de Contenedores Generales */
+.container {
+  max-width: 1200px;
+  width: 100%; /* Asegura que ocupe todo el ancho disponible en móviles */
+  padding: 0 15px; /* Espaciado interno para móviles */
+}
+
+/* Secciones (Login, Código, Tarjetas) */
+.login-section, .code-section, .cards-section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-section:hover, .code-section:hover, .cards-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Títulos */
+h3, h4 {
+  font-weight: bold;
+  color: #333;
+  text-align: center; /* Centrar los títulos en pantallas más pequeñas */
+}
+
+/* Tarjetas */
+.card {
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  background-color: #B0E2FF;
+  transform: scale(1.05);
+  transition: 0.5s ease;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Icono de Verificación en Tarjetas */
+.check-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: green;
+  display: none; /* Oculto por defecto */
+}
+
+/* Imágenes en Tarjetas */
+.card-img-top {
+  width: 100%;
+  height: auto;
+  max-height: 150px;
+  object-fit: cover;
+}
+
+/* Media Queries para Móviles */
+@media (max-width: 768px) {
+  body {
+    height: auto; /* Permitir que el cuerpo crezca según el contenido */
+    flex-direction: column; /* Ajuste a una columna para pantallas pequeñas */
+    justify-content: flex-start;
   }
 
-  ul li:hover{
-    background-color: #4A90E2;
-    transition: .4s ease;
-    cursor: defaultgit;
-    color:white;
-  }
-
-
-
-  /* Para mantener el espacio en el contenedor de código */
-
-  .form-control:focus {
-    box-shadow: none;
-  }
-  .code-section, .cards-section {
-    display: none;
-  }
-
-
-  /* Sección de tarjetas */
-  .cards-section {
-    margin-top: 2rem;
-  }
-
-
-    /* Ajustes generales para el contenido */
   .container {
-    max-width: 1200px;
+    max-width: 100%; /* Ocupa todo el ancho en pantallas móviles */
+    padding: 0 10px; /* Reducir el padding en móviles */
   }
 
   .login-section, .code-section, .cards-section {
-      background-color: white;
-      padding: 2rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1rem; /* Reducir el padding interno en móviles */
+    box-shadow: none; /* Eliminar sombras para reducir peso visual */
   }
 
-  .login-section:hover, .code-section:hover, .cards-section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  .login-form, .code-form, .card-container {
+    padding: 1rem; /* Reducir padding en formularios */
   }
 
   h3, h4 {
-      font-weight: bold;
-      color: #333;
+    font-size: 1.2rem; /* Ajustar tamaño de fuente para móviles */
   }
 
-  
+/* Estilos para el contenedor de las tarjetas */
+.card-container {
+  display: grid; /* Cambiamos a un sistema de cuadrícula */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustar el tamaño de las columnas automáticamente */
+  gap: 1.5rem; /* Espacio entre las tarjetas */
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 1rem;
+}
 
-  .form-control {
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .card-container {
+    grid-template-columns: repeat(3, 1fr); /* Mostramos 3 columnas cuando el ancho de pantalla es menor a 768px */
   }
-
-  .form-control:focus {
-    box-shadow: none;
-    border-color: #50E3C2;
-  }
-
-  button.btn-primary {
-    background-color: #50E3C2;
-    border-color: #50E3C2;
-    transition: background-color 0.3s ease;
-  }
-
-  button.btn-primary:hover {
-    background-color: #3BB197;
-  }
-
-
 
   .card {
-    border: none;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-  }
-
-  .card:hover {
-      background-color:#B0E2FF;
-      transform: scale(1.05);
-      transition:.5s ease;      
-      
+    padding: 0.5rem; /* Reducimos el padding en las tarjetas */
   }
 
   .card-body {
-      padding: 1.5rem;
-    }
-
-    .check-icon {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      color: #50E3C2;
-      display: none;
-    }
-
-    .card-img-top {
-      object-fit: cover;
-      height: 150px;
-    }
-
-
+    font-size: 0.9rem; /* Ajustamos el tamaño de la fuente para que todo encaje mejor */
   }
 
-
-    
-    /* Responsivo */
-    @media (max-width: 768px) {
-      .login-section, .code-section, .cards-section {
-        padding: 1rem;
-      }
-
-      .cards-section {
-        margin-top: 1rem;
-      }
-    }
-
-
-
-  .check-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: green;
-    display: none; /* Ocultar el icono por defecto */
-  }
   .card-img-top {
-    width: 100%; /* Asegura que la imagen ocupe el ancho completo */
-    height: auto; /* Mantiene la proporción de la imagen */
-    max-height: 150px; /* Altura máxima para la imagen */
-    object-fit: cover; /* Recorta la imagen si es necesario */
+    height: 100px; /* Reducimos el tamaño de las imágenes en pantallas pequeñas */
   }
+}
+
+
+button.btn-primary {
+    width: 100%; /* Botones ocupan todo el ancho en móviles */
+  }
+}
+
 
 
   </style>
@@ -227,7 +257,7 @@
       </div>
 
       <!-- Sección de Código de 4 Cifras -->
-      <div class="col-md-3 code-section" style="margin-right: 20px;">
+      <div class="col-md-3 code-section">
         <div class="code-form mt-2">
           <h3 class="text-center mb-4">Ingresar Código</h3>
           <form id="codeForm">
@@ -256,7 +286,7 @@
       </div>
 
       <!-- Sección de Cards para mostrar IDs del producto -->
-      <div class="col-md-6 cards-section">
+      <div class="col-md-6 cards-section" >
         <h3 class="text-center mt-4 bg-primary text-white" style="padding: 5px;">Resumen de venta</h3>
         <div id="cardContainer" class="row card-container"></div>
       </div>
@@ -336,7 +366,7 @@
         document.querySelector('.code-section').style.display = 'block';
     
         document.getElementById('title3Last').style.display = 'block';
-        document.getElementById('title3Last').style.marginLeft = '20px'; // Margen derecho
+      
       
         
 
