@@ -21,6 +21,8 @@
   padding: 0;
   }
 
+ 
+
   /* Sección de Código */
   .code-section {
   margin-top: 5%;
@@ -40,6 +42,8 @@
   .card-container {
   max-height: 600px;
   overflow-y: auto;
+  box-shadow: 0 0 0 transparent !important;
+  cursor:default;
   }
 
   /* Título con Fondo Transparente */
@@ -367,7 +371,7 @@
           const checkIcon = document.createElement("i");
           checkIcon.className = "bi bi-check-circle-fill text-success position-absolute";
           checkIcon.style.display = "none"; // Oculto por defecto
-          checkIcon.style.left = "35px"; // Ajusta la posición
+          checkIcon.style.left = "40px"; // Ajusta la posición
           checkIcon.style.transition = "opacity 0.4s"; // Efecto de desvanecimiento
 
           // Añadir el texto del identificador al li
