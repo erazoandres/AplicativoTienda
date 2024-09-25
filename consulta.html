@@ -15,15 +15,37 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      background-color: #f8f9fa;
+      background: linear-gradient(135deg, #000000, #ffffff); /* Gradiente de negro a blanco */
     }
 
     /* Agregar un margen superior para el título */
-    #title3Last {
-      background-color: aliceblue;      
-      margin-top: 20px; /* Espacio superior */
-      margin-bottom: 20px; /* Espacio inferior */
-    }
+  #title3Last {
+    position: fixed;
+    top: 40px;
+    right: 20px;
+
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 150px;
+    display: none; /* Oculto por defecto */
+}
+
+#title3Last h4{
+  font-size: 1em;
+}
+
+/* Media query para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+  #title3Last {
+    position: static; /* Elimina la posición fija */
+    width: 100%; /* Ocupa todo el ancho de la pantalla */
+    margin-top: 20px; /* Margen superior para separar de otros elementos */
+    display: block; /* Ahora es visible como un bloque */
+  }
+}
+
 
     .login-form, .code-form, .card-container {
       background-color: white;
