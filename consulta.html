@@ -46,17 +46,29 @@
   }
 }
 
+.code-section {
+  min-height: 300px; /* Asegura una altura mínima */
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .code-section {
+    width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+    margin-top: 20px; /* Margen superior para separarlo de otros elementos */
+  }
+}
+
 
     .login-form, .code-form, .card-container {
       background-color: white;
-      padding: 2rem;
+      padding: 1.5rem;
       border-radius: 0.5rem;
       box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     }
 
     /* Para mantener el espacio en el contenedor de código */
     .code-form {
-      margin-top: 20px; /* Espacio superior */
+      margin-top: 20%; /* Espacio superior */
     }
 
     .form-control:focus {
@@ -103,9 +115,9 @@
       <!-- Sección de Login -->
       <div class="col-md-4 login-section">
         <div class="login-form">
-          <h3 class="text-center mb-4">Iniciar Sesión</h3>
+          <h4 class="text-center mb-2">Iniciar Sesión</h4>
           <form id="loginForm">
-            <div class="form-group mb-3">
+            <div class="form-group mb-2">
               <label for="email">Correo electrónico</label>
               <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com" value = "admin@ejemplo.com" required>
               <div class="invalid-feedback">Por favor, ingresa un correo válido.</div>
@@ -147,8 +159,9 @@
 
         <!-- Nueva sección para mostrar los datos del producto -->
         <div id="productoDetalles" class="mt-4" style="display:none;">
-          <h4>Detalles del Producto</h4>
           <ul class="list-group">
+            <h4 class="list-group-item">Detalles del Producto</h4>
+            
             <li class="list-group-item"><strong>Identificador:</strong> <span id="productoIdentificador"></span></li>
             <li class="list-group-item"><strong>Nombre del Cliente:</strong> <span id="productoNombre"></span></li>
             <li class="list-group-item"><strong>Dirección: </strong><span id="productoDireccion"></span></li> 
@@ -159,8 +172,8 @@
       </div>
 
       <!-- Sección de Cards para mostrar IDs del producto -->
-      <div class="col-md-6 cards-section">
-        <h3 class="text-center mb-4">Resumen de venta</h3>
+      <div class="col-md-6 cards-section" style="display: none;">
+        <h3 class="text-center ">Resumen de venta</h3>
         <div id="cardContainer" class="row card-container"></div>
       </div>
 
@@ -230,16 +243,13 @@
       const validEmail = "admin@ejemplo.com";
       const validPassword = "123456";
 
-      document.getElementById('title3Last').style.display = 'none';
-      document.querySelector('.cards-section').style.display = 'block';
 
       // Validación de las credenciales
       if (emailInput.value === validEmail && passwordInput.value === validPassword) {
         // Si las credenciales son correctas, mostrar la sección de código
         document.querySelector('.login-section').style.display = 'none';
         document.querySelector('.code-section').style.display = 'block';
-        document.querySelector('.cards-section').style.display = 'block'; // Mostrar la sección de cards
-        
+    
         document.getElementById('title3Last').style.display = 'block';
 
 
@@ -260,6 +270,7 @@
       // Verificar que el código tenga exactamente 4 cifras
       if (codeValue.length !== 4 || isNaN(codeValue)) {
         codeInput.classList.add('is-invalid');
+        
       } else {
         codeInput.classList.remove('is-invalid');
 
@@ -295,6 +306,8 @@
             document.getElementById('productoDireccion').textContent = productData.direccion || 'N/A';
             document.getElementById('productoPrecio').textContent = productData.total.toLocaleString('es-ES') || 'N/A';
             document.getElementById('productoIds').textContent = idsArray.join(', ');
+
+            document.querySelector('.cards-section').style.display = 'block'; // Mostrar la sección de cards
 
             // Mostrar las tarjetas
             const cardContainer = document.getElementById('cardContainer');
