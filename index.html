@@ -404,6 +404,7 @@
             navigator.clipboard.writeText(identificador).then(() => {
               checkIcon.style.display = "block"; // Mostrar el icono de verificación
               checkIcon.style.opacity = "1"; // Asegurarse de que sea visible
+              document.getElementById('fourDigitCode').value = identificador;
               
               // Desvanecer el icono de verificación después de 0.4 segundos
               setTimeout(() => {
@@ -439,10 +440,7 @@
         // Si las credenciales son correctas, mostrar la sección de código
         document.querySelector('.login-section').style.display = 'none';
         document.querySelector('.code-section').style.display = 'block';
-
         document.getElementById('title3Last').style.display = 'block';
-
-
         document.querySelector('.login-section').style.display = 'none';
 
         // Llama a la función al cargar la página
