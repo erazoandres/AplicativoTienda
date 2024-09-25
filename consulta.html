@@ -6,6 +6,7 @@
   <title>Página de Login</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
   <style>
     body {
@@ -15,7 +16,7 @@
       justify-content: center;
       background-color: #f8f9fa;
     }
-    .login-form, .code-form {
+    .login-form, .code-form, .card-container {
       background-color: white;
       padding: 2rem;
       border-radius: 0.5rem;
@@ -24,8 +25,30 @@
     .form-control:focus {
       box-shadow: none;
     }
-    .code-section {
+    .code-section, .cards-section {
       display: none;
+    }
+    .card-container {
+      max-height: 400px; /* Aumenta la altura máxima para la sección de tarjetas */
+      overflow-y: auto; /* Habilitar scroll vertical */
+      margin-top: 1rem; /* Margen superior para separar del título */
+    }
+    .card {
+      margin-bottom: 1rem;
+      position: relative; /* Para posicionar el icono */
+    }
+    .check-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: green;
+      display: none; /* Ocultar el icono por defecto */
+    }
+    .card-img-top {
+      width: 100%; /* Asegura que la imagen ocupe el ancho completo */
+      height: auto; /* Mantiene la proporción de la imagen */
+      max-height: 150px; /* Altura máxima para la imagen */
+      object-fit: cover; /* Recorta la imagen si es necesario */
     }
   </style>
 </head>
@@ -63,33 +86,40 @@
         </div>
       </div>
 
-    <!-- Sección de Código de 4 Cifras -->
-    <div class="col-md-4 code-section">
+      <!-- Sección de Código de 4 Cifras -->
+      <div class="col-md-4 code-section">
         <div class="code-form">
-        <h3 class="text-center mb-4">Ingresar Código</h3>
-        <form id="codeForm">
+          <h3 class="text-center mb-4">Ingresar Código</h3>
+          <form id="codeForm">
             <div class="form-group mb-3">
-            <label for="fourDigitCode">Código de 4 Cifras</label>
-            <input type="number" class="form-control" id="fourDigitCode" placeholder="1234" required minlength="4" maxlength="4">
-            <div class="invalid-feedback">Por favor, ingresa un número de 4 cifras.</div>
+              <label for="fourDigitCode">Código de 4 Cifras</label>
+              <input type="number" class="form-control" id="fourDigitCode" placeholder="1234" required minlength="4" maxlength="4">
+              <div class="invalid-feedback">Por favor, ingresa un número de 4 cifras.</div>
             </div>
-    
+
             <button type="submit" class="btn btn-primary w-100">Enviar Código</button>
-        </form>
+          </form>
         </div>
-    
+
         <!-- Nueva sección para mostrar los datos del producto -->
         <div id="productoDetalles" class="mt-4" style="display:none;">
-        <h4>Detalles del Producto</h4>
-        <ul class="list-group">
+          <h4>Detalles del Producto</h4>
+          <ul class="list-group">
             <li class="list-group-item"><strong>Identificador:</strong> <span id="productoIdentificador"></span></li>
             <li class="list-group-item"><strong>Nombre del Producto:</strong> <span id="productoNombre"></span></li>
             <li class="list-group-item"><strong>Precio:</strong> <span id="productoPrecio"></span></li>
             <li class="list-group-item"><strong>IDs:</strong> <span id="productoIds"></span></li>
-        </ul>
+          </ul>
         </div>
+      </div>
+
+      <!-- Sección de Cards para mostrar IDs del producto -->
+      <div class="col-md-4 cards-section">
+        <h3 class="text-center mb-4">IDs del Producto</h3>
+        <div id="cardContainer" class="row card-container"></div>
+      </div>
     </div>
-  
+  </div>
 
   <!-- Firebase -->
   <script type="module">
@@ -127,67 +157,97 @@
         // Si las credenciales son correctas, mostrar la sección de código
         document.querySelector('.login-section').style.display = 'none';
         document.querySelector('.code-section').style.display = 'block';
+        document.querySelector('.cards-section').style.display = 'block'; // Mostrar la sección de cards
       } else {
         alert("Credenciales incorrectas. Por favor, intenta de nuevo.");
       }
     });
 
     // Validación del formulario de código de 4 cifras y consulta en Firebase
-document.getElementById('codeForm').addEventListener('submit', async function(event) {
-  event.preventDefault(); // Evitar envío
+    document.getElementById('codeForm').addEventListener('submit', async function(event) {
+      event.preventDefault(); // Evitar envío
 
-  const codeInput = document.getElementById('fourDigitCode');
-  const codeValue = codeInput.value.trim(); // Eliminar espacios en blanco al inicio o final
+      const codeInput = document.getElementById('fourDigitCode');
+      const codeValue = codeInput.value.trim(); // Eliminar espacios en blanco al inicio o final
 
-  // Verificar que el código tenga exactamente 4 cifras
-  if (codeValue.length !== 4 || isNaN(codeValue)) {
-    codeInput.classList.add('is-invalid');
-  } else {
-    codeInput.classList.remove('is-invalid');
-
-    try {
-      // Consultar Firebase para buscar el código en la colección "productos" bajo el campo "identificador"
-      const querySnapshot = await getDocs(collection(db, "productos"));
-      let found = false;
-      let idsArray = []; // Array para almacenar el campo "ids"
-      let productData = null; // Variable para almacenar los datos del producto
-
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const identificador = data.identificador;
-
-        // Convertir ambos valores a string para asegurar una comparación correcta
-        if (String(identificador) === String(codeValue)) {
-          found = true;
-          productData = data; // Guardar los datos del producto encontrado
-
-          // Capturar el campo "ids" y guardarlo en el array
-          if (data.ids && Array.isArray(data.ids)) {
-            idsArray = data.ids; // Asignar el array de "ids" al array local
-            console.log("IDs encontrados:", idsArray); // Mostrar en consola
-          }
-        }
-      });
-
-      if (!found) {
-        alert("El código no existe en la base de datos.");
+      // Verificar que el código tenga exactamente 4 cifras
+      if (codeValue.length !== 4 || isNaN(codeValue)) {
+        codeInput.classList.add('is-invalid');
       } else {
-        // Mostrar los datos del producto en la pantalla
-        document.getElementById('productoDetalles').style.display = 'block';
-        document.getElementById('productoIdentificador').textContent = productData.identificador;
-        document.getElementById('productoNombre').textContent = productData.nombre || 'N/A'; // Mostrar 'N/A' si el campo no existe
-        document.getElementById('productoPrecio').textContent = productData.precio || 'N/A';
-        document.getElementById('productoIds').textContent = idsArray.join(', ') || 'N/A';
+        codeInput.classList.remove('is-invalid');
+
+        try {
+          // Consultar Firebase para buscar el código en la colección "productos"
+          const querySnapshot = await getDocs(collection(db, "productos"));
+          let found = false;
+          let idsArray = []; // Array para almacenar el campo "ids"
+          let productData = null; // Variable para almacenar los datos del producto
+
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const identificador = data.identificador;
+
+            if (String(identificador) === String(codeValue)) {
+              found = true;
+              productData = data; // Guardar los datos del producto encontrado
+
+              // Capturar el campo "ids" y guardarlo en el array
+              if (data.ids && Array.isArray(data.ids)) {
+                idsArray = data.ids; // Asignar el array de "ids" al array local
+              }
+            }
+          });
+
+          if (!found) {
+            alert("El código no existe en la base de datos.");
+          } else {
+            // Mostrar los datos del producto en la pantalla
+            document.getElementById('productoDetalles').style.display = 'block';
+            document.getElementById('productoIdentificador').textContent = productData.identificador;
+            document.getElementById('productoNombre').textContent = productData.nombre || 'N/A';
+            document.getElementById('productoPrecio').textContent = productData.precio || 'N/A';
+
+            // Mostrar las tarjetas
+            const cardContainer = document.getElementById('cardContainer');
+            cardContainer.innerHTML = ''; // Limpiar el contenedor
+
+            idsArray.forEach(id => {
+              const idCard = `
+                <div class="col-6">
+                  <div class="card">
+                    <img src="licor.png" class="card-img-top" alt="Imagen del producto">
+                    <div class="check-icon" id="check-${id}"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="card-body">
+                      <h5 class="card-title">ID: ${id}</h5>
+                      <p class="card-text">Información adicional sobre el ID ${id} puede ir aquí.</p>
+                      <input type="checkbox" class="form-check-input" id="check-${id}-input">
+                    </div>
+                  </div>
+                </div>
+              `;
+              cardContainer.innerHTML += idCard; // Agregar la tarjeta al contenedor
+            });
+
+            // Agregar evento a cada checkbox
+            idsArray.forEach(id => {
+              const checkbox = document.getElementById(`check-${id}-input`);
+              const checkIcon = document.getElementById(`check-${id}`);
+
+              checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                  checkIcon.style.display = 'block'; // Mostrar icono de check
+                } else {
+                  checkIcon.style.display = 'none'; // Ocultar icono de check
+                }
+              });
+            });
+          }
+        } catch (error) {
+          console.error("Error al consultar Firebase: ", error);
+          alert("Error al consultar la base de datos.");
+        }
       }
-
-    } catch (error) {
-      console.error("Error al consultar Firebase: ", error);
-      alert("Error al consultar la base de datos.");
-    }
-  }
-});
-
-
+    });
   </script>
 
 </body>
