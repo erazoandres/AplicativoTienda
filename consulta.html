@@ -14,28 +14,50 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
       background-color: #f8f9fa;
     }
+
+    /* Agregar un margen superior para el título */
+    #title3Last {
+      background-color: aliceblue;      
+      margin-top: 20px; /* Espacio superior */
+      margin-bottom: 20px; /* Espacio inferior */
+    }
+
     .login-form, .code-form, .card-container {
       background-color: white;
       padding: 2rem;
       border-radius: 0.5rem;
       box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
     }
+
+    /* Para mantener el espacio en el contenedor de código */
+    .code-form {
+      margin-top: 20px; /* Espacio superior */
+    }
+
     .form-control:focus {
       box-shadow: none;
     }
     .code-section, .cards-section {
       display: none;
     }
+
+    /* Asegúrate de que el contenedor que lo envuelve tenga suficiente espacio */
+    .cards-section {
+      margin-top: 20px; /* Aumentar margen superior si es necesario */
+    }
+
     .card-container {
       max-height: 600px; /* Aumenta la altura máxima para la sección de tarjetas */
       overflow-y: auto; /* Habilitar scroll vertical */
       margin-top: 1rem; /* Margen superior para separar del título */
     }
     .card {
-      margin-bottom: 1rem;
-      position: relative; /* Para posicionar el icono */
+      margin-top: 20px; /* Aumentar margen para separación */
+      max-height: 600px; /* Aumenta la altura máxima */
+      overflow-y: auto; /* Habilitar scroll vertical */
     }
     .check-icon {
       position: absolute;
@@ -63,13 +85,13 @@
           <form id="loginForm">
             <div class="form-group mb-3">
               <label for="email">Correo electrónico</label>
-              <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com" required>
+              <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com" value = "admin@ejemplo.com" required>
               <div class="invalid-feedback">Por favor, ingresa un correo válido.</div>
             </div>
 
             <div class="form-group mb-3">
               <label for="password">Contraseña</label>
-              <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+              <input type="password" class="form-control" id="password" placeholder="Contraseña" value = "123456" required>
               <div class="invalid-feedback">Por favor, ingresa una contraseña.</div>
             </div>
 
@@ -107,19 +129,26 @@
           <ul class="list-group">
             <li class="list-group-item"><strong>Identificador:</strong> <span id="productoIdentificador"></span></li>
             <li class="list-group-item"><strong>Nombre del Cliente:</strong> <span id="productoNombre"></span></li>
-            <li class="list-group-item"><strong>Direccion: </strong><span id="productoDireccion"></span></li> 
+            <li class="list-group-item"><strong>Dirección: </strong><span id="productoDireccion"></span></li> 
             <li class="list-group-item"><strong>Total: </strong> <span id="productoPrecio"></span></li>
             <li class="list-group-item"><strong>IDs:</strong> <span id="productoIds"></span></li>
           </ul>
         </div>
       </div>
 
-<!-- Sección de Cards para mostrar IDs del producto -->
-<div class="col-md-6 cards-section">
-  <h3 class="text-center mb-4">Resumen de venta</h3>
-  <div id="cardContainer" class="row card-container"></div>
-</div>
+      <!-- Sección de Cards para mostrar IDs del producto -->
+      <div class="col-md-6 cards-section">
+        <h3 class="text-center mb-4">Resumen de venta</h3>
+        <div id="cardContainer" class="row card-container"></div>
+      </div>
 
+      <!-- Nueva sección para mostrar los últimos 3 identificadores -->
+      <div class="col-md-3" id="title3Last" style="display: none;">
+        <h4 class="text-center mb-4">Últimos 3 Identificadores</h4>
+        <ul id="ultimosIdentificadores" class="list-group">
+          <!-- Los identificadores se insertarán aquí -->
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -127,7 +156,7 @@
   <script type="module">
     // Importar Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 
     // Configuración de Firebase
     const firebaseConfig = {
@@ -143,6 +172,31 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
+    // Función para obtener los últimos 3 identificadores
+    async function obtenerUltimosIdentificadores() {
+      try {
+        const querySnapshot = await getDocs(collection(db, "productos"), orderBy("createdAt", "desc"), limit(3));
+        const ulIdentificadores = document.getElementById("ultimosIdentificadores");
+        ulIdentificadores.innerHTML = ''; // Limpiar lista existente
+        const docsArray = querySnapshot.docs; // Convertir a array
+        const maxItems = Math.min(docsArray.length, 3); // Obtener el mínimo entre la cantidad de documentos y 3
+
+        for (let i = 0; i < maxItems; i++) {
+          const data = docsArray[i].data();
+          const identificador = data.identificador;
+          const li = document.createElement("li");
+          li.className = "list-group-item";
+          li.textContent = identificador; // Añadir el identificador a la lista
+          ulIdentificadores.appendChild(li);
+        }
+
+ 
+      } catch (error) {
+        console.error("Error al obtener los últimos identificadores: ", error);
+      }
+    }
+
+
     // Lógica de inicio de sesión
     document.getElementById('loginForm').addEventListener('submit', function(event) {
       event.preventDefault(); // Evitar envío del formulario de login
@@ -154,12 +208,21 @@
       const validEmail = "admin@ejemplo.com";
       const validPassword = "123456";
 
+      document.getElementById('title3Last').style.display = 'none';
+      document.querySelector('.cards-section').style.display = 'block';
+
       // Validación de las credenciales
       if (emailInput.value === validEmail && passwordInput.value === validPassword) {
         // Si las credenciales son correctas, mostrar la sección de código
         document.querySelector('.login-section').style.display = 'none';
         document.querySelector('.code-section').style.display = 'block';
         document.querySelector('.cards-section').style.display = 'block'; // Mostrar la sección de cards
+        
+        document.getElementById('title3Last').style.display = 'block';
+
+
+        // Llama a la función al cargar la página
+        obtenerUltimosIdentificadores();
       } else {
         alert("Credenciales incorrectas. Por favor, intenta de nuevo.");
       }
@@ -230,10 +293,7 @@
                     </div>
                 `;
                 cardContainer.innerHTML += idCard; // Agregar la tarjeta al contenedor
-
-                //  <p class="card-text">Información adicional sobre el ID ${id} puede ir aquí.</p>
             });
-
 
             // Agregar evento a cada checkbox
             idsArray.forEach(id => {
