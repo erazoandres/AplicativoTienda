@@ -15,97 +15,176 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      background: linear-gradient(135deg, #000000, #ffffff); /* Gradiente de negro a blanco */
-    }
+      background: linear-gradient(135deg, #4A90E2, #50E3C2); /* Gradiente mejorado */
 
-    /* Agregar un margen superior para el título */
+
+
+
+  /* Sección de código */
+  .code-section {
+    margin-top: 5%;
+    padding-top: 1.5rem;
+  }
+
+  .login-form, .code-form, .card-container {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+
+  .card-container {
+      max-height: 600px;
+      overflow-y: auto;
+  }
+
   #title3Last {
-    position: fixed;
-    top: 40px;
-    right: 20px;
-
-    padding: 10px;
-    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    width: 150px;
-    display: none; /* Oculto por defecto */
+    height: auto; /* Asegúrate de que el contenedor ajuste su altura al contenido */
+    max-height: 400px; /* Máxima altura si deseas limitarlo */
+    overflow-y: auto; /* Permitir scroll si el contenido excede la altura */
 }
 
-#title3Last h4{
-  font-size: 1em;
-}
-
-/* Media query para pantallas pequeñas (móviles) */
-@media (max-width: 768px) {
-  #title3Last {
-    position: static; /* Elimina la posición fija */
-    width: 100%; /* Ocupa todo el ancho de la pantalla */
-    margin-top: 20px; /* Margen superior para separar de otros elementos */
-    display: block; /* Ahora es visible como un bloque */
+  #title3Last h4{
+      padding-top: 10%;
+      margin-top: 10%;
   }
-}
 
-.code-section {
-  min-height: 300px; /* Asegura una altura mínima */
-  padding: 10px;
-}
-
-@media (max-width: 768px) {
-  .code-section {
-    width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
-    margin-top: 20px; /* Margen superior para separarlo de otros elementos */
+  ul li:hover{
+    background-color: #4A90E2;
+    transition: .4s ease;
+    cursor: default;
   }
-}
 
 
-    .login-form, .code-form, .card-container {
+
+  /* Para mantener el espacio en el contenedor de código */
+
+  .form-control:focus {
+    box-shadow: none;
+  }
+  .code-section, .cards-section {
+    display: none;
+  }
+
+
+  /* Sección de tarjetas */
+  .cards-section {
+    margin-top: 2rem;
+  }
+
+
+    /* Ajustes generales para el contenido */
+  .container {
+    max-width: 1200px;
+  }
+
+  .login-section, .code-section, .cards-section {
       background-color: white;
-      padding: 1.5rem;
+      padding: 2rem;
       border-radius: 0.5rem;
-      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .login-section:hover, .code-section:hover, .cards-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  h3, h4 {
+      font-weight: bold;
+      color: #333;
+  }
+
+  .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+  }
+
+  .form-control:focus {
+    box-shadow: none;
+    border-color: #50E3C2;
+  }
+
+  button.btn-primary {
+    background-color: #50E3C2;
+    border-color: #50E3C2;
+    transition: background-color 0.3s ease;
+  }
+
+  button.btn-primary:hover {
+    background-color: #3BB197;
+  }
+
+
+
+  .card {
+    border: none;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+      transform: scale(1.05);
+  }
+
+  .card-body {
+      background-color: #F7F9FC;
+      padding: 1.5rem;
     }
 
-    /* Para mantener el espacio en el contenedor de código */
-    .code-form {
-      margin-top: 20%; /* Espacio superior */
-    }
-
-    .form-control:focus {
-      box-shadow: none;
-    }
-    .code-section, .cards-section {
-      display: none;
-    }
-
-    /* Asegúrate de que el contenedor que lo envuelve tenga suficiente espacio */
-    .cards-section {
-      margin-top: 20px; /* Aumentar margen superior si es necesario */
-    }
-
-    .card-container {
-      max-height: 600px; /* Aumenta la altura máxima para la sección de tarjetas */
-      overflow-y: auto; /* Habilitar scroll vertical */
-      margin-top: 1rem; /* Margen superior para separar del título */
-    }
-    .card {
-      margin-top: 20px; /* Aumentar margen para separación */
-      max-height: 600px; /* Aumenta la altura máxima */
-      overflow-y: auto; /* Habilitar scroll vertical */
-    }
     .check-icon {
       position: absolute;
       top: 10px;
       right: 10px;
-      color: green;
-      display: none; /* Ocultar el icono por defecto */
+      color: #50E3C2;
+      display: none;
     }
+
     .card-img-top {
-      width: 100%; /* Asegura que la imagen ocupe el ancho completo */
-      height: auto; /* Mantiene la proporción de la imagen */
-      max-height: 150px; /* Altura máxima para la imagen */
-      object-fit: cover; /* Recorta la imagen si es necesario */
+      object-fit: cover;
+      height: 150px;
     }
+
+
+  }
+
+
+    
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .login-section, .code-section, .cards-section {
+        padding: 1rem;
+      }
+
+      .cards-section {
+        margin-top: 1rem;
+      }
+    }
+
+
+
+  .check-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: green;
+    display: none; /* Ocultar el icono por defecto */
+  }
+  .card-img-top {
+    width: 100%; /* Asegura que la imagen ocupe el ancho completo */
+    height: auto; /* Mantiene la proporción de la imagen */
+    max-height: 150px; /* Altura máxima para la imagen */
+    object-fit: cover; /* Recorta la imagen si es necesario */
+  }
+
+
   </style>
 </head>
 <body>
@@ -144,12 +223,12 @@
 
       <!-- Sección de Código de 4 Cifras -->
       <div class="col-md-3 code-section">
-        <div class="code-form">
+        <div class="code-form mt-2">
           <h3 class="text-center mb-4">Ingresar Código</h3>
           <form id="codeForm">
             <div class="form-group mb-3">
               <label for="fourDigitCode">Código de 4 Cifras</label>
-              <input type="number" class="form-control" id="fourDigitCode" placeholder="1234" required minlength="4" maxlength="4">
+              <input type="number" class="form-control" id="fourDigitCode" placeholder="1234" required minlength="4" maxlength="4" value = 5952>
               <div class="invalid-feedback">Por favor, ingresa un número de 4 cifras.</div>
             </div>
 
@@ -160,7 +239,7 @@
         <!-- Nueva sección para mostrar los datos del producto -->
         <div id="productoDetalles" class="mt-4" style="display:none;">
           <ul class="list-group">
-            <h4 class="list-group-item">Detalles del Producto</h4>
+            <h4 class="list-group-item " style="font-size: 1rem;background-color: #4A90E2;color: #fff;">Detalles del Producto</h4>
             
             <li class="list-group-item"><strong>Identificador:</strong> <span id="productoIdentificador"></span></li>
             <li class="list-group-item"><strong>Nombre del Cliente:</strong> <span id="productoNombre"></span></li>
@@ -172,18 +251,19 @@
       </div>
 
       <!-- Sección de Cards para mostrar IDs del producto -->
-      <div class="col-md-6 cards-section" style="display: none;">
-        <h3 class="text-center ">Resumen de venta</h3>
+      <div class="col-md-6 cards-section">
+        <h3 class="text-center mt-4">Resumen de venta</h3>
         <div id="cardContainer" class="row card-container"></div>
       </div>
 
       <!-- Nueva sección para mostrar los últimos 3 identificadores -->
-      <div class="col-md-3" id="title3Last" style="display: none;">
-        <h4 class="text-center mb-4">Últimos 3 Identificadores</h4>
+      <div class="col-md-2" id="title3Last" style="display: none;">
+        <h4 class="text-center mb-3">Últimos 3 Identificadores</h4>
         <ul id="ultimosIdentificadores" class="list-group">
-          <!-- Los identificadores se insertarán aquí -->
+            <!-- Los identificadores se insertarán aquí -->
         </ul>
       </div>
+
     </div>
   </div>
 
@@ -251,6 +331,10 @@
         document.querySelector('.code-section').style.display = 'block';
     
         document.getElementById('title3Last').style.display = 'block';
+        document.getElementById('title3Last').style.marginLeft = '20px'; // Margen derecho
+      
+        
+
 
 
         // Llama a la función al cargar la página
@@ -271,11 +355,13 @@
       if (codeValue.length !== 4 || isNaN(codeValue)) {
         codeInput.classList.add('is-invalid');
         
+        
       } else {
         codeInput.classList.remove('is-invalid');
 
         try {
           // Consultar Firebase para buscar el código en la colección "productos"
+          
           const querySnapshot = await getDocs(collection(db, "productos"));
           let found = false;
           let idsArray = []; // Array para almacenar el campo "ids"
@@ -308,6 +394,7 @@
             document.getElementById('productoIds').textContent = idsArray.join(', ');
 
             document.querySelector('.cards-section').style.display = 'block'; // Mostrar la sección de cards
+            document.getElementById('title3Last').style.transform = 'translateY(100px)'; // Mover hacia abajo 20px
 
             // Mostrar las tarjetas
             const cardContainer = document.getElementById('cardContainer');
