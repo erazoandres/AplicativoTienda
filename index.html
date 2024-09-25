@@ -1,207 +1,448 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda de Productos</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Login</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
-    <script type="module">
-        // Importar las funciones necesarias de Firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
-        import { productosSeleccionados } from './datos.js';
-        
-
-        // Hacerla global
-        window.idAleatorio = Math.floor(Math.random() * 9000) + 1000;
-        // Importar la variable totalCosto desde datos.js
-        import { totalCosto } from "./datos.js";  // Importación de datos.js
-
-        // Configuración de Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyBFTypg5rh1dzt8fxmiA03UhKR8Uf3KA6Q",
-            authDomain: "tienda-c69be.firebaseapp.com",
-            projectId: "tienda-c69be",
-            storageBucket: "tienda-c69be.appspot.com",
-            messagingSenderId: "771742316743",
-            appId: "1:771742316743:web:2dd6d3822adc6f09b626e2"
-        };
-
-        // Inicializar Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        // Función para insertar datos
-        async function insertarDatos(nombre, direccion, telefono, total, ids , identificador) {
-            window.idAleatorio = Math.floor(Math.random() * 9000) + 1000;
-            try {
-                const docRef = await addDoc(collection(db, "productos"), {
-                    nombre: nombre,
-                    identificador, identificador,
-                    direccion: direccion,
-                    telefono: telefono,
-                    total: total,
-                    ids : ids
-                });
-                console.log("Documento escrito con ID: ", docRef.id);
-                alert("Pedido registrado, porfavor envia el ID a el asesor por Whatsapp");
-            } catch (e) {
-                console.error("Error al añadir documento: ", e);
-                alert("Error al insertar datos");
-            }
-        }
-
-        // Llama a la función con los datos que deseas insertar al hacer clic en finalizar compra
-        window.onload = function() {
-            document.getElementById('finalizarCompra').addEventListener('click', function() {
-                // Mostrar el modal para ingresar datos del usuario
-                const datosModal = new bootstrap.Modal(document.getElementById('datosModal'));
-                datosModal.show();
-            });
-
-            document.getElementById('botonEnviarPedido').addEventListener('click', async function() {
-                
-                
-               
-                // Obtener los valores de los inputs del formulario
-                const nombre = document.getElementById('nombreInput').value;
-                const direccion = document.getElementById('direccionInput').value;
-                const telefono = document.getElementById('telefonoInput').value;
-
-                // Validar que los campos no estén vacíos
-                if (!nombre || !direccion || !telefono) {
-                    alert("Todos los campos son obligatorios. Intenta de nuevo.");
-                    return; // Salir de la función si algún campo está vacío
-                }
-
-                let idsProductos = Object.keys(productosSeleccionados).map(id => parseInt(id, 10)); // Convierte a entero
-                console.log(idsProductos); // Esto imprimirá un array con los IDs, por ejemplo: [1, 2]  
-
-                
-                
-                // Insertar datos en Firebase
- 
-                if (window.modalCerradoPorBoton){
-
-                    await insertarDatos(nombre, direccion, telefono, totalCosto,idsProductos, window.idAleatorio); // Aquí se utiliza totalCosto importado
-                }
-                // Cerrar el modal
-                const datosModal = bootstrap.Modal.getInstance(document.getElementById('datosModal'));
-                datosModal.hide();
-
-                // Limpiar los campos del formulario
-                document.getElementById('datosForm').reset();
-                
-            });
-        };
-    </script>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #4A90E2, #50E3C2); /* Gradiente mejorado */
 
 
 
+
+  /* Sección de código */
+  .code-section {
+    margin-top: 5%;
+    padding-top: 1.5rem;
+  }
+
+  .login-form, .code-form, .card-container {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+
+  .card-container {
+      max-height: 600px;
+      overflow-y: auto;
+  }
+
+  #title3Last {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    height: auto; /* Asegúrate de que el contenedor ajuste su altura al contenido */
+    max-height: 400px; /* Máxima altura si deseas limitarlo */
+    overflow-y: auto; /* Permitir scroll si el contenido excede la altura */
+}
+
+  #title3Last h4{
+      padding-top: 10%;
+      margin-top: 10%;
+  }
+
+  ul li:hover{
+    background-color: #4A90E2;
+    transition: .4s ease;
+    cursor: defaultgit;
+    color:white;
+  }
+
+
+
+  /* Para mantener el espacio en el contenedor de código */
+
+  .form-control:focus {
+    box-shadow: none;
+  }
+  .code-section, .cards-section {
+    display: none;
+  }
+
+
+  /* Sección de tarjetas */
+  .cards-section {
+    margin-top: 2rem;
+  }
+
+
+    /* Ajustes generales para el contenido */
+  .container {
+    max-width: 1200px;
+  }
+
+  .login-section, .code-section, .cards-section {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .login-section:hover, .code-section:hover, .cards-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  h3, h4 {
+      font-weight: bold;
+      color: #333;
+  }
+
+  
+
+  .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+  }
+
+  .form-control:focus {
+    box-shadow: none;
+    border-color: #50E3C2;
+  }
+
+  button.btn-primary {
+    background-color: #50E3C2;
+    border-color: #50E3C2;
+    transition: background-color 0.3s ease;
+  }
+
+  button.btn-primary:hover {
+    background-color: #3BB197;
+  }
+
+
+
+  .card {
+    border: none;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+      background-color:#B0E2FF;
+      transform: scale(1.05);
+      transition:.5s ease;      
+      
+  }
+
+  .card-body {
+      padding: 1.5rem;
+    }
+
+    .check-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #50E3C2;
+      display: none;
+    }
+
+    .card-img-top {
+      object-fit: cover;
+      height: 150px;
+    }
+
+
+  }
+
+
+    
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .login-section, .code-section, .cards-section {
+        padding: 1rem;
+      }
+
+      .cards-section {
+        margin-top: 1rem;
+      }
+    }
+
+
+
+  .check-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: green;
+    display: none; /* Ocultar el icono por defecto */
+  }
+  .card-img-top {
+    width: 100%; /* Asegura que la imagen ocupe el ancho completo */
+    height: auto; /* Mantiene la proporción de la imagen */
+    max-height: 150px; /* Altura máxima para la imagen */
+    object-fit: cover; /* Recorta la imagen si es necesario */
+  }
+
+
+  </style>
 </head>
 <body>
 
-    <!-- Barra de Navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Mi Tienda</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">PROMOCIONES</a>
-                    </li>
-                </ul>
+  <div class="container">
+    <div class="row justify-content-center">
+      <!-- Sección de Login -->
+      <div class="col-md-4 login-section">
+        <div class="login-form">
+          <h4 class="text-center mb-2">Iniciar Sesión</h4>
+          <form id="loginForm">
+            <div class="form-group mb-2">
+              <label for="email">Correo electrónico</label>
+              <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com" value = "admin@ejemplo.com" required>
+              <div class="invalid-feedback">Por favor, ingresa un correo válido.</div>
             </div>
-        </div>
-    </nav>
 
-    <!-- Sección de Productos con Buscador -->
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Lista de Productos</h1>
-
-        <!-- Buscador -->
-        <div class="row mb-4">
-            <div class="col-md-6 ">
-                <input type="text" id="productSearch" class="form-control" placeholder="Buscar productos...">
+            <div class="form-group mb-3">
+              <label for="password">Contraseña</label>
+              <input type="password" class="form-control" id="password" placeholder="Contraseña" value = "123456" required>
+              <div class="invalid-feedback">Por favor, ingresa una contraseña.</div>
             </div>
-        </div>
 
-        <!-- Lista de Productos -->
-        <div class="row" id="productList">
-            <!-- Cada producto será generado dinámicamente -->
-        </div>
-
-        <!-- Botón Finalizar Compra -->
-        <div class="row mt-4">
-            <div class="col text-center">
-                <button id="finalizarCompra" class="btn btn-primary" disabled>Finalizar Compra</button>
+            <div class="form-group form-check mb-3">
+              <input type="checkbox" class="form-check-input" id="rememberMe">
+              <label class="form-check-label" for="rememberMe">Recuérdame</label>
             </div>
+
+            <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+          </form>
+          <div class="mt-3">
+            <a href="#">¿Olvidaste tu contraseña?</a>
+          </div>
         </div>
+      </div>
+
+      <!-- Sección de Código de 4 Cifras -->
+      <div class="col-md-3 code-section" style="margin-right: 20px;">
+        <div class="code-form mt-2">
+          <h3 class="text-center mb-4">Ingresar Código</h3>
+          <form id="codeForm">
+            <div class="form-group mb-3">
+              <label for="fourDigitCode">Código de 4 Cifras</label>
+              <input type="number" class="form-control" id="fourDigitCode" placeholder="1234" required minlength="4" maxlength="4" value = 8184>
+              <div class="invalid-feedback">Por favor, ingresa un número de 4 cifras.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Enviar Código</button>
+          </form>
+        </div>
+
+        <!-- Nueva sección para mostrar los datos del producto -->
+        <div id="productoDetalles" class="mt-4" style="display:none;">
+          <ul class="list-group">
+            <h4 class="list-group-item " style="font-size: 1rem;background-color: #4A90E2;color: #fff;">Detalles del Producto</h4>
+            
+            <li class="list-group-item"><strong>Identificador:</strong> <span id="productoIdentificador"></span></li>
+            <li class="list-group-item"><strong>Nombre del Cliente:</strong> <span id="productoNombre"></span></li>
+            <li class="list-group-item"><strong>Dirección: </strong><span id="productoDireccion"></span></li> 
+            <li class="list-group-item"><strong>Total: </strong> <span id="productoPrecio"></span></li>
+            <li class="list-group-item"><strong>IDs:</strong> <span id="productoIds"></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Sección de Cards para mostrar IDs del producto -->
+      <div class="col-md-6 cards-section">
+        <h3 class="text-center mt-4 bg-primary text-white" style="padding: 5px;">Resumen de venta</h3>
+        <div id="cardContainer" class="row card-container"></div>
+      </div>
+
+      <!-- Nueva sección para mostrar los últimos 3 identificadores -->
+      <div class="col-md-2" id="title3Last" style="display: none;">
+        <h4 class="text-center mb-3">Últimos 3 Identificadores</h4>
+        <ul id="ultimosIdentificadores" class="list-group">
+            <!-- Los identificadores se insertarán aquí -->
+        </ul>
+      </div>
+
     </div>
+  </div>
 
-    <!-- Icono de Carrito -->
-    <div class="cart-icon" id="cartIcon">
-        🛒 <span id="cartCount" class="badge bg-danger">0</span>
-    </div>
+  <!-- Firebase -->
+  <script type="module">
+    // Importar Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+    import { getFirestore, collection, getDocs, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+
+    // Configuración de Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBFTypg5rh1dzt8fxmiA03UhKR8Uf3KA6Q",
+      authDomain: "tienda-c69be.firebaseapp.com",
+      projectId: "tienda-c69be",
+      storageBucket: "tienda-c69be.appspot.com",
+      messagingSenderId: "771742316743",
+      appId: "1:771742316743:web:2dd6d3822adc6f09b626e2"
+    };
+
+    // Inicializar Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Función para obtener los últimos 3 identificadores
+    async function obtenerUltimosIdentificadores() {
+      try {
+        const querySnapshot = await getDocs(collection(db, "productos"), orderBy("createdAt", "desc"), limit(3));
+        const ulIdentificadores = document.getElementById("ultimosIdentificadores");
+        ulIdentificadores.innerHTML = ''; // Limpiar lista existente
+        const docsArray = querySnapshot.docs; // Convertir a array
+        const maxItems = Math.min(docsArray.length, 3); // Obtener el mínimo entre la cantidad de documentos y 3
+
+        for (let i = 0; i < maxItems; i++) {
+          const data = docsArray[i].data();
+          const identificador = data.identificador;
+          const li = document.createElement("li");
+          li.className = "list-group-item";
+          li.textContent = identificador; // Añadir el identificador a la lista
+          ulIdentificadores.appendChild(li);
+        }
+
+ 
+      } catch (error) {
+        console.error("Error al obtener los últimos identificadores: ", error);
+      }
+    }
 
 
-    <!-- Modal de Resumen de Pedido -->
-    <div class="modal fade" id="pedidoModal" tabindex="-1" aria-labelledby="pedidoModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="pedidoModalLabel">Resumen de Pedido</h5>
-                    <button type="button" class="btn-close" id="closeModalButton"></button>
-                </div>
-                <div class="modal-body">
-                    <pre id="resumenPedido"></pre>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" id="botonEnviarPedido"> Enviar Pedido</button>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
+    // Lógica de inicio de sesión
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Evitar envío del formulario de login
 
-    <!-- Modal para ingresar datos del usuario -->
-    <div class="modal fade" id="datosModal" tabindex="-1" aria-labelledby="datosModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="datosModalLabel">Ingrese sus datos</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="datosForm">
-                        <div class="mb-3">
-                            <label for="nombreInput" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombreInput" required>
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+
+      // Credenciales predeterminadas
+      const validEmail = "admin@ejemplo.com";
+      const validPassword = "123456";
+
+
+      // Validación de las credenciales
+      if (emailInput.value === validEmail && passwordInput.value === validPassword) {
+        // Si las credenciales son correctas, mostrar la sección de código
+        document.querySelector('.login-section').style.display = 'none';
+        document.querySelector('.code-section').style.display = 'block';
+    
+        document.getElementById('title3Last').style.display = 'block';
+        document.getElementById('title3Last').style.marginLeft = '20px'; // Margen derecho
+      
+        
+
+
+
+        // Llama a la función al cargar la página
+        obtenerUltimosIdentificadores();
+      } else {
+        alert("Credenciales incorrectas. Por favor, intenta de nuevo.");
+      }
+    });
+
+    // Validación del formulario de código de 4 cifras y consulta en Firebase
+    document.getElementById('codeForm').addEventListener('submit', async function(event) {
+      event.preventDefault(); // Evitar envío
+
+      const codeInput = document.getElementById('fourDigitCode');
+      const codeValue = codeInput.value.trim(); // Eliminar espacios en blanco al inicio o final
+
+      // Verificar que el código tenga exactamente 4 cifras
+      if (codeValue.length !== 4 || isNaN(codeValue)) {
+        codeInput.classList.add('is-invalid');
+        
+        
+      } else {
+        codeInput.classList.remove('is-invalid');
+
+        try {
+          // Consultar Firebase para buscar el código en la colección "productos"
+          
+          const querySnapshot = await getDocs(collection(db, "productos"));
+          let found = false;
+          let idsArray = []; // Array para almacenar el campo "ids"
+          let productData = null; // Variable para almacenar los datos del producto
+
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const identificador = data.identificador;
+
+            if (String(identificador) === String(codeValue)) {
+              found = true;
+              productData = data; // Guardar los datos del producto encontrado
+
+              // Capturar el campo "ids" y guardarlo en el array
+              if (data.ids && Array.isArray(data.ids)) {
+                idsArray = data.ids; // Asignar el array de "ids" al array local
+              }
+            }
+          });
+
+          if (!found) {
+            alert("El código no existe en la base de datos.");
+          } else {
+            // Mostrar los datos del producto en la pantalla
+            document.getElementById('productoDetalles').style.display = 'block';
+            document.getElementById('productoIdentificador').textContent = productData.identificador;
+            document.getElementById('productoNombre').textContent = productData.nombre || 'N/A';
+            document.getElementById('productoDireccion').textContent = productData.direccion || 'N/A';
+            document.getElementById('productoPrecio').textContent = productData.total.toLocaleString('es-ES') || 'N/A';
+            document.getElementById('productoIds').textContent = idsArray.join(', ');
+
+            document.querySelector('.cards-section').style.display = 'block'; // Mostrar la sección de cards
+            document.getElementById('title3Last').style.transform = 'translateY(100px)'; // Mover hacia abajo 20px
+
+            // Mostrar las tarjetas
+            const cardContainer = document.getElementById('cardContainer');
+            cardContainer.innerHTML = ''; // Limpiar el contenedor
+
+            idsArray.forEach(id => {
+                const idCard = `
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4"> <!-- Diseño responsivo: 3 productos en pantallas grandes, 2 en medianas, 1 en pequeñas -->
+                    <div class="card">
+                        <img src="licor.png" class="card-img-top" alt="Imagen del producto">
+                        <div class="check-icon" id="check-${id}"><i class="bi bi-check-circle-fill"></i></div>
+                        <div class="card-body" >
+                        <h5 class="card-title">ID: ${id}</h5>
+                       
+                        <input type="checkbox" class="form-check-input" id="check-${id}-input">
                         </div>
-                        <div class="mb-3">
-                            <label for="direccionInput" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" id="direccionInput" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="telefonoInput" class="form-label">Teléfono</label>
-                            <input type="text" class="form-control" id="telefonoInput" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="guardarDatosButton">Guardar</button>
-                </div>  
-            </div>
-        </div>
-    </div>
+                    </div>
+                    </div>
+                `;
+                cardContainer.innerHTML += idCard; // Agregar la tarjeta al contenedor
+            });
 
+            // Agregar evento a cada checkbox
+            idsArray.forEach(id => {
+              const checkbox = document.getElementById(`check-${id}-input`);
+              const checkIcon = document.getElementById(`check-${id}`);
 
+              checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                  checkIcon.style.display = 'block'; // Mostrar icono de check
+                } else {
+                  checkIcon.style.display = 'none'; // Ocultar icono de check
+                }
+              });
+            });
+          }
+        } catch (error) {
+          console.error("Error al consultar Firebase: ", error);
+          alert("Error al consultar la base de datos.");
+        }
+      }
+    });
+  </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
