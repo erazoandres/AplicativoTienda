@@ -29,7 +29,7 @@
       display: none;
     }
     .card-container {
-      max-height: 400px; /* Aumenta la altura máxima para la sección de tarjetas */
+      max-height: 600px; /* Aumenta la altura máxima para la sección de tarjetas */
       overflow-y: auto; /* Habilitar scroll vertical */
       margin-top: 1rem; /* Margen superior para separar del título */
     }
@@ -107,7 +107,8 @@
           <ul class="list-group">
             <li class="list-group-item"><strong>Identificador:</strong> <span id="productoIdentificador"></span></li>
             <li class="list-group-item"><strong>Nombre del Cliente:</strong> <span id="productoNombre"></span></li>
-            <li class="list-group-item"><strong>Total:</strong> <span id="productoPrecio"></span></li>
+            <li class="list-group-item"><strong>Direccion: </strong><span id="productoDireccion"></span></li> 
+            <li class="list-group-item"><strong>Total: </strong> <span id="productoPrecio"></span></li>
             <li class="list-group-item"><strong>IDs:</strong> <span id="productoIds"></span></li>
           </ul>
         </div>
@@ -115,7 +116,7 @@
 
 <!-- Sección de Cards para mostrar IDs del producto -->
 <div class="col-md-6 cards-section">
-  <h3 class="text-center mb-4">IDs del Producto</h3>
+  <h3 class="text-center mb-4">Resumen de venta</h3>
   <div id="cardContainer" class="row card-container"></div>
 </div>
 
@@ -206,7 +207,8 @@
             document.getElementById('productoDetalles').style.display = 'block';
             document.getElementById('productoIdentificador').textContent = productData.identificador;
             document.getElementById('productoNombre').textContent = productData.nombre || 'N/A';
-            document.getElementById('productoPrecio').textContent = productData.total || 'N/A';
+            document.getElementById('productoDireccion').textContent = productData.direccion || 'N/A';
+            document.getElementById('productoPrecio').textContent = productData.total.toLocaleString('es-ES') || 'N/A';
             document.getElementById('productoIds').textContent = idsArray.join(', ');
 
             // Mostrar las tarjetas
