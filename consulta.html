@@ -87,7 +87,7 @@
       </div>
 
       <!-- Sección de Código de 4 Cifras -->
-      <div class="col-md-4 code-section">
+      <div class="col-md-3 code-section">
         <div class="code-form">
           <h3 class="text-center mb-4">Ingresar Código</h3>
           <form id="codeForm">
@@ -106,18 +106,19 @@
           <h4>Detalles del Producto</h4>
           <ul class="list-group">
             <li class="list-group-item"><strong>Identificador:</strong> <span id="productoIdentificador"></span></li>
-            <li class="list-group-item"><strong>Nombre del Producto:</strong> <span id="productoNombre"></span></li>
+            <li class="list-group-item"><strong>Nombre del Cliente:</strong> <span id="productoNombre"></span></li>
             <li class="list-group-item"><strong>Total:</strong> <span id="productoPrecio"></span></li>
             <li class="list-group-item"><strong>IDs:</strong> <span id="productoIds"></span></li>
           </ul>
         </div>
       </div>
 
-      <!-- Sección de Cards para mostrar IDs del producto -->
-      <div class="col-md-4 cards-section">
-        <h3 class="text-center mb-4">IDs del Producto</h3>
-        <div id="cardContainer" class="row card-container"></div>
-      </div>
+<!-- Sección de Cards para mostrar IDs del producto -->
+<div class="col-md-6 cards-section">
+  <h3 class="text-center mb-4">IDs del Producto</h3>
+  <div id="cardContainer" class="row card-container"></div>
+</div>
+
     </div>
   </div>
 
@@ -213,21 +214,24 @@
             cardContainer.innerHTML = ''; // Limpiar el contenedor
 
             idsArray.forEach(id => {
-              const idCard = `
-                <div class="col-6">
-                  <div class="card">
-                    <img src="licor.png" class="card-img-top" alt="Imagen del producto">
-                    <div class="check-icon" id="check-${id}"><i class="bi bi-check-circle-fill"></i></div>
-                    <div class="card-body">
-                      <h5 class="card-title">ID: ${id}</h5>
-                      <p class="card-text">Información adicional sobre el ID ${id} puede ir aquí.</p>
-                      <input type="checkbox" class="form-check-input" id="check-${id}-input">
+                const idCard = `
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4"> <!-- Diseño responsivo: 3 productos en pantallas grandes, 2 en medianas, 1 en pequeñas -->
+                    <div class="card">
+                        <img src="licor.png" class="card-img-top" alt="Imagen del producto">
+                        <div class="check-icon" id="check-${id}"><i class="bi bi-check-circle-fill"></i></div>
+                        <div class="card-body">
+                        <h5 class="card-title">ID: ${id}</h5>
+                       
+                        <input type="checkbox" class="form-check-input" id="check-${id}-input">
+                        </div>
                     </div>
-                  </div>
-                </div>
-              `;
-              cardContainer.innerHTML += idCard; // Agregar la tarjeta al contenedor
+                    </div>
+                `;
+                cardContainer.innerHTML += idCard; // Agregar la tarjeta al contenedor
+
+                //  <p class="card-text">Información adicional sobre el ID ${id} puede ir aquí.</p>
             });
+
 
             // Agregar evento a cada checkbox
             idsArray.forEach(id => {
