@@ -107,7 +107,7 @@
           <ul class="list-group">
             <li class="list-group-item"><strong>Identificador:</strong> <span id="productoIdentificador"></span></li>
             <li class="list-group-item"><strong>Nombre del Producto:</strong> <span id="productoNombre"></span></li>
-            <li class="list-group-item"><strong>Precio:</strong> <span id="productoPrecio"></span></li>
+            <li class="list-group-item"><strong>Total:</strong> <span id="productoPrecio"></span></li>
             <li class="list-group-item"><strong>IDs:</strong> <span id="productoIds"></span></li>
           </ul>
         </div>
@@ -205,7 +205,7 @@
             document.getElementById('productoDetalles').style.display = 'block';
             document.getElementById('productoIdentificador').textContent = productData.identificador;
             document.getElementById('productoNombre').textContent = productData.nombre || 'N/A';
-            document.getElementById('productoPrecio').textContent = productData.precio || 'N/A';
+            document.getElementById('productoPrecio').textContent = productData.total || 'N/A';
             document.getElementById('productoIds').textContent = idsArray.join(', ');
 
             // Mostrar las tarjetas
