@@ -102,30 +102,21 @@
     </script>
 
     <style>
-        #imgProducto{
-            display: block;
-            padding: 5px;
-            object-fit: contain;
-        }
 
-        #imgProducto p{
-            
-            margin: 0;
-            padding: 0;
-        }
 
         body{
             background-image: url("4028.jpg");
             background-repeat: no-repeat;
-
             background-size: cover;
         }
 
-        #imgProducto img{
-            padding: 20px;;
-            background-image: url("4028.jpg") !important;
+        
+        #imgProducto{
+          padding: 6px;
         }
+  
 
+        
         .b-example-divider {
         height: 3rem;
         background-color: rgba(0, 0, 0, .1);
@@ -235,8 +226,8 @@
         <h1 class="text-center mb-4">Lista de Productos</h1>
 
         <!-- Buscador -->
-        <div class="row mb-4">
-            <div class="col-md-6 ">
+        <div class="row mb-4" style="display: flex; justify-content: center;">
+            <div class="col-md-4">
                 <input type="text" id="productSearch" class="form-control" placeholder="Buscar productos...">
             </div>
         </div>
