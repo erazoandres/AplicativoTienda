@@ -33,9 +33,7 @@ export const productos = [
   { id: 20, nombre: "Té Chai", precio: "$6000", descripcion: "Mezcla de especias para preparar té chai.", categoria: "Bebidas", imagen: "https://exitocol.vtexassets.com/arquivos/ids/22840514/Te-Chai-Con-Especias-TAEQ-100-gr-3482463_a.jpg" }
 ];
 
-
 window.modalCerradoPorBoton = false
-
 
 // Objeto para almacenar productos seleccionados
 export let productosSeleccionados = {}; 
@@ -88,9 +86,6 @@ function mostrarProductos(productosFiltrados) {
       actualizarCarrito();
     });
   });
-
-
-
 
   //BOTON DE INCREMENT0
   document.querySelectorAll('.producto').forEach(producto => {
