@@ -53,7 +53,7 @@ function generarProductoHTML(producto) {
           <p style ="margin:0"><strong>Categoría:</strong> ${producto.categoria}</p>
         </div>
 
-        <div class="quantity-controls">
+        <div class="quantity-controls" >
           <button style = "background-color:transparent" class="btn btn-sm btn-decrement">
             <i style = "color:red" class="fa fa-chevron-left"></i> <!-- Icono de flecha izquierda -->
           </button>
