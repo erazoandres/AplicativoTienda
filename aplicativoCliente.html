@@ -98,7 +98,11 @@
                 document.getElementById('datosForm').reset();
                 
             });
-        };
+       
+            document.getElementById('cartCount').addEventListener('click', async function() {
+              console.log(productosSeleccionados)
+            });
+          };
     </script>
 
     <style>
@@ -146,26 +150,26 @@
         }
 
         @media (max-width: 768px) {
-    #productList {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Dos columnas */
-        gap: 20px; /* Espacio entre las tarjetas */
-    }
+          #productList {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr); /* Dos columnas */
+              gap: 20px; /* Espacio entre las tarjetas */
+          }
 
-    .card {
-        width: 100%; /* Ajusta el ancho de las tarjetas para que ocupen todo el ancho de su columna */
-        margin: 0; /* No es necesario centrar las tarjetas en este caso */
-    }
+          .card {
+              width: 100%; /* Ajusta el ancho de las tarjetas para que ocupen todo el ancho de su columna */
+              margin: 0; /* No es necesario centrar las tarjetas en este caso */
+          }
 
-    .card-img-top {
-        width: 100%; /* Asegura que la imagen se ajuste al ancho de la tarjeta */
-        height: auto; /* Mantiene la proporción de la imagen */
-    }
+          .card-img-top {
+              width: 100%; /* Asegura que la imagen se ajuste al ancho de la tarjeta */
+              height: auto; /* Mantiene la proporción de la imagen */
+          }
 
-    .card-body {
-        font-size: 0.9rem; /* Disminuye el tamaño de la fuente si es necesario */
-    }
-}
+          .card-body {
+              font-size: 0.9rem; /* Disminuye el tamaño de la fuente si es necesario */
+          }
+      }
 
 
     </style>

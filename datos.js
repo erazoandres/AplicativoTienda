@@ -1,5 +1,7 @@
 // datos.js
 
+//
+export let resumenTexto =  "Resumen de Pedido:\n\n";
 
 // Variable para almacenar el costo total
 export let totalCosto = 0; 
@@ -163,7 +165,6 @@ document.getElementById('guardarDatosButton').addEventListener('click', async fu
   document.getElementById('resumenPedido').textContent = "";
 
   // Calcular y mostrar el resumen del pedido
-  let resumenTexto = "Resumen de Pedido:\n\n";
   totalCosto = 0;
 
   for (const [id, cantidad] of Object.entries(productosSeleccionados)) {
