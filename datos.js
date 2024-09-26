@@ -54,17 +54,14 @@ function generarProductoHTML(producto) {
         </div>
 
         <div class="quantity-controls">
-          <button class="btn btn-sm btn-decrement">
-            <i class="fa fa-chevron-left"></i> <!-- Icono de flecha izquierda -->
+          <button style = "background-color:transparent" class="btn btn-sm btn-decrement">
+            <i style = "color:red" class="fa fa-chevron-left"></i> <!-- Icono de flecha izquierda -->
           </button>
           <span class="quantity-display">1</span>
-          <button class="btn btn-sm btn-increment">
-            <i class="fa fa-chevron-right"></i> <!-- Icono de flecha derecha -->
+          <button style = "background-color:transparent" class="btn btn-sm btn-increment">
+            <i style = "color:green" class="fa fa-chevron-right"></i> <!-- Icono de flecha derecha -->
           </button>
         </div>
-
-
-
       </div>
     </div>
   `;
