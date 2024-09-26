@@ -52,11 +52,19 @@ function generarProductoHTML(producto) {
           <p style ="margin:0"><strong>Precio:</strong> ${producto.precio}</p>
           <p style ="margin:0"><strong>Categoría:</strong> ${producto.categoria}</p>
         </div>
+
         <div class="quantity-controls">
-          <button class="btn btn-sm btn-secondary btn-decrement">-</button>
+          <button class="btn btn-sm btn-decrement">
+            <i class="fa fa-chevron-left"></i> <!-- Icono de flecha izquierda -->
+          </button>
           <span class="quantity-display">1</span>
-          <button class="btn btn-sm btn-secondary btn-increment">+</button>
+          <button class="btn btn-sm btn-increment">
+            <i class="fa fa-chevron-right"></i> <!-- Icono de flecha derecha -->
+          </button>
         </div>
+
+
+
       </div>
     </div>
   `;
