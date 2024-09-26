@@ -42,10 +42,10 @@ export let productosSeleccionados = {};
 function generarProductoHTML(producto) {
   
   return `
-    <div class="col-md-3 mb-4"> 
+    <div class="col-md-2 mb-4">
       <div class="card h-100 producto" data-id="${producto.id}">
         <div class="quantity-icon">0</div>
-        <img id ="imgProducto" src="${producto.imagen}" alt="${producto.nombre}">
+        <img id ="imgProducto" class = "img-fluid rounded" src="${producto.imagen}" alt="${producto.nombre}">
         
         <div class="card-body">
           <p class="card-text" style = "font-style:italic">${producto.descripcion}</p>
