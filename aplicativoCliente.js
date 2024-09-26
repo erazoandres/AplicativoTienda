@@ -2,10 +2,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
+let resumenTexto =  "Resumen de Pedido:\n\n";
+let totalCosto = 0 ;
 
 // Hacerla global
 window.idAleatorio = Math.floor(Math.random() * 9000) + 1000;
-// Importar la variable totalCosto desde datos.js
+
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -40,6 +42,7 @@ async function insertarDatos(nombre, direccion, telefono, total, ids , identific
         alert("Error al insertar datos");
     }
 }
+
 
 // Llama a la función con los datos que deseas insertar al hacer clic en finalizar compra
 window.onload = function() {
@@ -83,17 +86,26 @@ window.onload = function() {
         document.getElementById('datosForm').reset();
         
     });
+
+    document.getElementById("cartIcon").addEventListener('click', async function() {
+        for (const [id, cantidad] of Object.entries(productosSeleccionados)) {
+            const producto = productos.find(p => p.id === parseInt(id));
+            if (producto) {
+              const costoProducto = parseFloat(producto.precio.replace('$', ''));
+              totalCosto += costoProducto * cantidad;
+              resumenTexto += `${producto.nombre}: ${cantidad} - Precio: $${costoProducto}\n`;
+            }
+        }
+    
+        alert(resumenTexto)
+    })
+
+
 };
 
-let resumenTexto =  "Resumen de Pedido:\n\n";
 
-// Variable para almacenar el costo total
-export let totalCosto = 0; 
 
-// Función para actualizar el total
-export function actualizarTotal(nuevoTotal) {
-  totalCosto = nuevoTotal; 
-}
+
 
 //Base de datas de prueba *Array*.
 export const productos = [
