@@ -1,4 +1,3 @@
-
 // datos.js
 
 
@@ -35,9 +34,6 @@ export const productos = [
 ];
 
 
-
-
-
 window.modalCerradoPorBoton = false
 
 
@@ -51,12 +47,12 @@ function generarProductoHTML(producto) {
     <div class="col-md-3 mb-4"> 
       <div class="card h-100 producto" data-id="${producto.id}">
         <div class="quantity-icon">0</div>
-        <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}">
+        <img id ="imgProducto" src="${producto.imagen}" alt="${producto.nombre}">
         
         <div class="card-body">
-          <p class="card-text">${producto.descripcion}</p>
-          <p><strong>Precio:</strong> ${producto.precio}</p>
-          <p><strong>Categoría:</strong> ${producto.categoria}</p>
+          <p class="card-text" style = "font-style:italic">${producto.descripcion}</p>
+          <p style ="margin:0"><strong>Precio:</strong> ${producto.precio}</p>
+          <p style ="margin:0"><strong>Categoría:</strong> ${producto.categoria}</p>
         </div>
         <div class="quantity-controls">
           <button class="btn btn-sm btn-secondary btn-decrement">-</button>
@@ -198,7 +194,6 @@ resumenTexto += `\nCosto Total: $${totalCosto}`;
 
 // Confirmar cierre del modal de resumen
 const botonEnviarPedido = document.getElementById('botonEnviarPedido');
-
 function confirmCloseModal() {
   const confirmClose = confirm("¿Enviamos pedido?");
   const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
@@ -208,7 +203,6 @@ function confirmCloseModal() {
 
 // Confirmar cierre del modal de resumen
 const closeModalButton = document.getElementById('closeModalButton');
-
 
 
 // Función para confirmar el cierre

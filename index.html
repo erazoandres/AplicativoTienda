@@ -11,76 +11,72 @@
   <style>
   /* General Layout */
   body {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: linear-gradient(135deg, #4A90E2, #50E3C2); /* Gradiente de fondo */
-  margin: 0; /* Eliminar márgenes en móviles */
-  padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #4A90E2, #50E3C2); /* Gradiente de fondo */
+    margin: 0; /* Eliminar márgenes en móviles */
+    padding: 0;
   }
-
- 
- 
 
   /* Sección de Código */
   .code-section {
-  margin-top: 5%;
-  padding-top: 1.5rem;
-  display: none; /* Oculto por defecto */
+    margin-top: 5%;
+    padding-top: 1.5rem;
+    display: none; /* Oculto por defecto */
   }
 
   /* Formularios y Contenedores Generales */
   .login-form, .code-form, .card-container {
-  background-color: white;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   }
 
   /* Contenedor de Tarjetas */
   .card-container {
-  max-height: 600px;
-  overflow-y: auto;
-  box-shadow: 0 0 0 transparent !important;
-  cursor:default;
+    max-height: 600px;
+    overflow-y: auto;
+    box-shadow: 0 0 0 transparent !important;
+    cursor:default;
   }
 
-  /* Título con Fondo Transparente */
   #title3Last {
-  background-color: rgba(255, 255, 255, 0.85);
-  padding: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  max-height: 400px;
-  overflow-y: auto;
-  cursor: default;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+    cursor: default;
   }
 
   #title3Last h4 {
-  padding-top: 10%;
-  margin-top: 10%;
+    padding-top: 10%;
+    margin-top: 10%;
   }
 
   /* Hover en Lista */
   ul li:hover {
-  background-color: #4A90E2;
-  transition: 0.4s ease;
-  cursor: default;
-  color: white;
-  font-weight: bold;
+    background-color: #4A90E2;
+    transition: 0.4s ease;
+    cursor: default;
+    color: white;
+    font-weight: bold;
   }
 
   /* Inputs de Formularios */
   .form-control {
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
   }
 
   .form-control:focus {
-  box-shadow: none;
-  border-color: #50E3C2;
+    box-shadow: none;
+    border-color: #50E3C2;
   }
 
   /* Para Chrome, Safari, Edge, Opera */
@@ -90,11 +86,6 @@
     margin: 0;
   }
 
-  /* Para Firefox */
-  input[type=number] {
-      -moz-appearance: textfield;
-  }
-
 
   #container-login-form{
     gap: 20px;
@@ -102,149 +93,98 @@
 
   /* Botones */
   button.btn-primary {
-  background-color: #50E3C2;
-  border-color: #50E3C2;
-  transition: background-color 0.3s ease;
+    background-color: #50E3C2;
+    border-color: #50E3C2;
+    transition: background-color 0.3s ease;
   }
 
   button.btn-primary:hover {
-  background-color: #3BB197;
+    background-color: #3BB197;
   }
 
   /* Sección de Tarjetas */
   .cards-section {
-  margin-top: 2rem;
-  display: none; /* Oculto por defecto */
+    margin-top: 2rem;
+    display: none; /* Oculto por defecto */
   }
 
   /* Ajustes de Contenedores Generales */
   .container {
-  max-width: 1200px;
-  width: 100%; /* Asegura que ocupe todo el ancho disponible en móviles */
-  padding: 0 15px; /* Espaciado interno para móviles */
+    max-width: 1200px;
+    width: 100%; /* Asegura que ocupe todo el ancho disponible en móviles */
+    padding: 0 15px; /* Espaciado interno para móviles */
   }
 
   /* Secciones (Login, Código, Tarjetas) */
   .login-section, .code-section, .cards-section {
-  background-color: white;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .login-section:hover, .code-section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   }
 
-  /* Títulos */
-  h3, h4 {
-  font-weight: bold;
-  color: #333;
-  text-align: center; /* Centrar los títulos en pantallas más pequeñas */
-  }
+  
+
+    /* Títulos */
+    h3, h4 {
+        font-weight: bold;
+        color: #333;
+        text-align: center; /* Centrar los títulos en pantallas más pequeñas */
+    }
 
   form button:hover{
     font-weight: bold;
   }
 
-  /* Tarjetas */
-  .card {
-  border: none;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  }
-
-  .card:hover {
-  background-color: #B0E2FF;
-  transform: scale(1.05);
-  transition: 0.5s ease;
-  }
-
-  .card-body {
-  padding: 1.5rem;
-  }
-
-  /* Icono de Verificación en Tarjetas */
-  .check-icon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  color: green;
-  display: none; /* Oculto por defecto */
-  }
-
-  /* Imágenes en Tarjetas */
-  .card-img-top {
-  width: 100%;
-  height: auto;
-  max-height: 150px;
-  object-fit: cover;
-  }
-
-  /* Media Queries para Móviles */
-  @media (max-width: 768px) {
-  body {
-  height: auto; /* Permitir que el cuerpo crezca según el contenido */
-  flex-direction: column; /* Ajuste a una columna para pantallas pequeñas */
-  justify-content: flex-start;
-  }
 
   .container {
-  max-width: 100%; /* Ocupa todo el ancho en pantallas móviles */
-  padding: 0 10px; /* Reducir el padding en móviles */
+    max-width: 100%; /* Ocupa todo el ancho en pantallas móviles */
+    padding: 0 10px; /* Reducir el padding en móviles */
   }
 
   .login-section, .code-section, .cards-section {
-  padding: 1rem; /* Reducir el padding interno en móviles */
-  box-shadow: none; /* Eliminar sombras para reducir peso visual */
+    padding: 1rem; /* Reducir el padding interno en móviles */
+    box-shadow: none; /* Eliminar sombras para reducir peso visual */
   }
 
   .login-form, .code-form, .card-container {
-  padding: 1rem; /* Reducir padding en formularios */
+    padding: 1rem; /* Reducir padding en formularios */
   }
 
   h3, h4 {
-  font-size: 1.2rem; /* Ajustar tamaño de fuente para móviles */
+    font-size: 1.2rem; /* Ajustar tamaño de fuente para móviles */
   }
+}
 
-  /* Estilos para el contenedor de las tarjetas */
-  .card-container {
-  display: grid; /* Cambiamos a un sistema de cuadrícula */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustar el tamaño de las columnas automáticamente */
-  gap: 1.5rem; /* Espacio entre las tarjetas */
-  max-height: 600px;
-  overflow-y: auto;
-  padding: 1rem;
-  }
 
   /* Media Queries para pantallas pequeñas */
   @media (max-width: 768px) {
-  .card-container {
-  grid-template-columns: repeat(3, 1fr); /* Mostramos 3 columnas cuando el ancho de pantalla es menor a 768px */
-  }
+    .card-container {
+      grid-template-columns: repeat(3, 1fr); /* Mostramos 3 columnas cuando el ancho de pantalla es menor a 768px */
+    }
 
-  .card {
-  padding: 0.5rem; /* Reducimos el padding en las tarjetas */
-  }
+    .card {
+      padding: 0.5rem; /* Reducimos el padding en las tarjetas */
+    }
 
-  .card-body {
-  font-size: 0.9rem; /* Ajustamos el tamaño de la fuente para que todo encaje mejor */
-  }
+    .card-body {
+      font-size: 0.9rem; /* Ajustamos el tamaño de la fuente para que todo encaje mejor */
+    }
 
-  .card-img-top {
-  height: 100px; /* Reducimos el tamaño de las imágenes en pantallas pequeñas */
-  }
-  }
-
-
+    .card-img-top {
+      height: 100px; /* Reducimos el tamaño de las imágenes en pantallas pequeñas */
+    }
+  
   button.btn-primary {
   width: 100%; /* Botones ocupan todo el ancho en móviles */
   }
-  }
+}
 
 
   .list-group-item{
@@ -254,7 +194,6 @@
   /* Aumentar la especificidad del selector */
   ul li:hover .bi {
     color: #50E3C2; /* Cambiar al color deseado */
-
   }
 
 
@@ -290,7 +229,7 @@
             <button type="submit" class="btn btn-primary w-100">Ingresar</button>
           </form>
           <div class="mt-3">
-            <a href="./aplicativoPedido.html">¿Olvidaste tu contraseña?</a>
+            <a href="./aplicativoCliente.html">¿Olvidaste tu contraseña?</a>
           </div>
         </div>
       </div>
@@ -318,6 +257,7 @@
             <li class="list-group-item"><strong>Identificador:</strong> <span id="productoIdentificador"></span></li>
             <li class="list-group-item"><strong>Nombre Cliente:</strong> <span id="productoNombre"></span></li>
             <li class="list-group-item"><strong>Dirección: </strong><span id="productoDireccion"></span></li> 
+            <li class="list-group-item"><strong>Telefono: </strong><span id="productoTelefono"></span></li> 
             <li class="list-group-item"><strong>Total: </strong> <span id="productoPrecio"></span></li>
             <li class="list-group-item"><strong>IDs:</strong> <span id="productoIds"></span></li>
           </ul>
@@ -366,7 +306,6 @@
     const db = getFirestore(app);
 
     // Función para obtener los últimos 3 identificadores
-
     async function obtenerUltimosIdentificadores() {
       try {
         const querySnapshot = await getDocs(collection(db, "productos"), orderBy("createdAt", "desc"), limit(3));
@@ -499,6 +438,7 @@
             document.getElementById('productoIdentificador').textContent = productData.identificador;
             document.getElementById('productoNombre').textContent = productData.nombre || 'N/A';
             document.getElementById('productoDireccion').textContent = productData.direccion || 'N/A';
+            document.getElementById('productoTelefono').textContent = productData.telefono || 'N/A';
             document.getElementById('productoPrecio').textContent = productData.total.toLocaleString('es-ES') || 'N/A';
             document.getElementById('productoIds').textContent = idsArray.join(', ');
 
