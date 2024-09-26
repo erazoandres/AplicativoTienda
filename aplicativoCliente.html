@@ -108,13 +108,13 @@
             background-image: url("4028.jpg");
             background-repeat: no-repeat;
             background-size: cover;
+            cursor: default;
         }
 
         
         #imgProducto{
           padding: 6px;
-        }
-  
+        } 
 
         
         .b-example-divider {
@@ -131,6 +131,10 @@
         border-color: var(--bs-gray);
         }
 
+        .card-text{
+          display: none;
+        }
+
 
         .bi {
         vertical-align: -.125em;
@@ -140,6 +144,29 @@
         .text-small {
         font-size: 85%;
         }
+
+        @media (max-width: 768px) {
+    #productList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Dos columnas */
+        gap: 20px; /* Espacio entre las tarjetas */
+    }
+
+    .card {
+        width: 100%; /* Ajusta el ancho de las tarjetas para que ocupen todo el ancho de su columna */
+        margin: 0; /* No es necesario centrar las tarjetas en este caso */
+    }
+
+    .card-img-top {
+        width: 100%; /* Asegura que la imagen se ajuste al ancho de la tarjeta */
+        height: auto; /* Mantiene la proporción de la imagen */
+    }
+
+    .card-body {
+        font-size: 0.9rem; /* Disminuye el tamaño de la fuente si es necesario */
+    }
+}
+
 
     </style>
 
@@ -223,7 +250,7 @@
     
     <!-- Sección de Productos con Buscador -->
     <div class="container mt-5 mb-5">
-        <h1 class="text-center mb-4">Lista de Productos</h1>
+        <h1 class="text-center mb-4" style="color: #fff;">Lista de Productos</h1>
 
         <!-- Buscador -->
         <div class="row mb-4" style="display: flex; justify-content: center;">
