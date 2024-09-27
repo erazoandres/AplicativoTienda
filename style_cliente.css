@@ -1,4 +1,5 @@
 
+
 body{
   background-image: url("4028.jpg");
   background-repeat: no-repeat;
@@ -26,9 +27,7 @@ background-color: var(--bs-dark);
 border-color: var(--bs-gray);
 }
 
-.card-text{
-display: none;
-}
+
 
 
 .bi {
@@ -39,6 +38,18 @@ fill: currentColor;
 .text-small {
 font-size: 85%;
 }
+
+.card-body{
+  padding-bottom: 6px !important;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.card-text{
+  line-height: 1.2;
+  font-size: .8rem;
+}
+
 
 @media (max-width: 768px) {
 #productList {
@@ -57,9 +68,13 @@ width: 100%; /* Asegura que la imagen se ajuste al ancho de la tarjeta */
 height: auto; /* Mantiene la proporción de la imagen */
 }
 
-.card-body {
-font-size: 0.9rem; /* Disminuye el tamaño de la fuente si es necesario */
+.card-body  p{
+  font-size: 0.9rem; /* Disminuye el tamaño de la fuente si es necesario */
 }
+.card-text{
+  display: none;
+}
+
 }
 
 /**/
@@ -153,7 +168,7 @@ button:hover {
 
 .quantity-controls {
   display: none; 
-  padding: 10px; 
+  padding: 0 10px; 
   background-color: #f8f9fa; 
   border-top: 1px solid #e0e0e0; 
 }
