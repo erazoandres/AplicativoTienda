@@ -168,7 +168,7 @@
 
           idsArray.forEach(id => {
             const idCard = `
-              <div class="col-lg-3 col-md-6 col-sm-12 mb-4"> <!-- Diseño responsivo: 3 productos en pantallas grandes, 2 en medianas, 1 en pequeñas -->
+              <div class="col-lg-3 col-md-6 col-sm-4 mb-4"> <!-- Diseño responsivo: 3 productos en pantallas grandes, 2 en medianas, 1 en pequeñas -->
                 <div class="card">
                   <img src="licor.png" class="card-img-top" alt="Imagen del producto">
                   
