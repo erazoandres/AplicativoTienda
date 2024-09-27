@@ -118,7 +118,7 @@ window.onload = function() {
     });
 
     document.getElementById("cartIcon").addEventListener('click', async function() {
-        let temp_resumenTexto = " ";
+        let temp_resumenTexto = "";
         let temp_totalCosto = 0;
 
         for (const [id, cantidad] of Object.entries(productosSeleccionados)) {
@@ -130,7 +130,7 @@ window.onload = function() {
             }
         }
 
-        temp_resumenTexto += 'TOTAL : ' + `${temp_totalCosto}`
+        temp_resumenTexto += '\nTOTAL : ' + `${temp_totalCosto}`
     
         alert(temp_resumenTexto)
     })
