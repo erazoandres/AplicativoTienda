@@ -137,6 +137,8 @@
           if (String(identificador) === String(codeValue)) {
             found = true;
             productData = data; // Guardar los datos del producto encontrado
+            document.getElementById('container-login-form').style.transform = 'translateY(-2%)';
+
 
             // Capturar el campo "ids" y guardarlo en el array
             if (data.ids && Array.isArray(data.ids)) {
