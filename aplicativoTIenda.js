@@ -160,7 +160,7 @@
           document.getElementById('productoIds').textContent = idsArray.join(', ');
 
           document.querySelector('.cards-section').style.display = 'block'; // Mostrar la sección de cards
-          document.getElementById('title3Last').style.transform = 'translateY(100px)'; // Mover hacia abajo 20px
+         
 
           // Mostrar las tarjetas
           const cardContainer = document.getElementById('cardContainer');
