@@ -99,9 +99,12 @@
       document.querySelector('.code-section').style.display = 'block';
       document.getElementById('title3Last').style.display = 'block';
       document.querySelector('.login-section').style.display = 'none';
-
+      document.getElementById('main_nav').style.display = 'block';
+      
       // Llama a la función al cargar la página
       obtenerUltimosIdentificadores();
+      
+      
     } else {
       alert("Credenciales incorrectas. Por favor, intenta de nuevo.");
     }
