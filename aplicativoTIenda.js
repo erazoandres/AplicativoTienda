@@ -168,10 +168,10 @@
 
           idsArray.forEach(id => {
             const idCard = `
-              <div class="col-lg-4 col-md-6 col-sm-12 mb-4"> <!-- Diseño responsivo: 3 productos en pantallas grandes, 2 en medianas, 1 en pequeñas -->
+              <div class="col-lg-3 col-md-6 col-sm-12 mb-4"> <!-- Diseño responsivo: 3 productos en pantallas grandes, 2 en medianas, 1 en pequeñas -->
                 <div class="card">
                   <img src="licor.png" class="card-img-top" alt="Imagen del producto">
-                  <div class="check-icon" id="check-${id}"><i class="bi bi-check-circle-fill"></i></div>
+                  
                   <div class="card-body">
                     <h5 class="card-title">ID: ${id}</h5>
                     <input type="checkbox" class="form-check-input" id="check-${id}-input">
@@ -182,19 +182,7 @@
             cardContainer.innerHTML += idCard; // Agregar la tarjeta al contenedor
           });
 
-          // Agregar evento a cada checkbox
-          idsArray.forEach(id => {
-            const checkbox = document.getElementById(`check-${id}-input`);
-            const checkIcon = document.getElementById(`check-${id}`);
 
-            checkbox.addEventListener('change', function() {
-              if (this.checked) {
-                checkIcon.style.display = 'block'; // Mostrar icono de check
-              } else {
-                checkIcon.style.display = 'none'; // Ocultar icono de check
-              }
-            });
-          });
         }
       } catch (error) {
         console.error("Error al consultar Firebase: ", error);

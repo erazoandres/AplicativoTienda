@@ -12,7 +12,7 @@ body {
 
 /* Sección de Código */
 .code-section {
-  margin-top: 5%;
+  margin-top: 2%;
   padding-top: 1.5rem;
   display: none; /* Oculto por defecto */
 }
@@ -55,6 +55,8 @@ ul li:hover {
   color: white;
   font-weight: bold;
 }
+
+
 
 /* Inputs de Formularios */
 .form-control {
@@ -147,6 +149,11 @@ h3, h4 {
   font-size: 1.2rem; /* Ajustar tamaño de fuente para móviles */
 }
 
+.card-body{
+  background-color: rgba(0, 0, 0, 0.1);
+
+}
+
 
 /* Media Queries para pantallas pequeñas */
 @media (max-width: 768px) {
@@ -160,6 +167,7 @@ h3, h4 {
 
   .card-body {
     font-size: 0.9rem; /* Ajustamos el tamaño de la fuente para que todo encaje mejor */
+
   }
 
   .card-img-top {
@@ -173,6 +181,10 @@ width: 100%; /* Botones ocupan todo el ancho en móviles */
 
 .list-group-item{
   font-size: 1rem;
+}
+
+#productoDetalles li{
+  padding:3px !important;
 }
 
 /* Aumentar la especificidad del selector */
