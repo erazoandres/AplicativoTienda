@@ -35,6 +35,8 @@ font-size: 85%;
   padding-bottom: 6px !important;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   background-color: rgba(0, 0, 0, 0.1);
+  bottom: 5px;
+  font-size: .9em;
 }
 
 .card-text{
