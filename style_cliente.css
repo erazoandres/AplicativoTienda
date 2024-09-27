@@ -1,17 +1,84 @@
-/* Estilos previos */
 
-/* General Layout */
 
-body {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: linear-gradient(135deg, #4A90E2, #50E3C2); /* Gradiente de fondo */
-  margin: 0; /* Eliminar márgenes en móviles */
-  padding: 0;
+body{
+  background-image: url("4028.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: default;
 }
+
+
+#imgProducto{
+padding: 6px;
+} 
+
+
+.b-example-divider {
+height: 3rem;
+background-color: rgba(0, 0, 0, .1);
+border: solid rgba(0, 0, 0, .15);
+border-width: 1px 0;
+box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+
+.form-control-dark {
+color: #fff;
+background-color: var(--bs-dark);
+border-color: var(--bs-gray);
+}
+
+
+
+
+.bi {
+vertical-align: -.125em;
+fill: currentColor;
+}
+
+.text-small {
+font-size: 85%;
+}
+
+.card-body{
+  padding-bottom: 6px !important;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.card-text{
+  line-height: 1.2;
+  font-size: .8rem;
+}
+
+
+@media (max-width: 768px) {
+#productList {
+display: grid;
+grid-template-columns: repeat(3, 1fr); /* Dos columnas */
+gap: 20px; /* Espacio entre las tarjetas */
+}
+
+.card {
+width: 100%; /* Ajusta el ancho de las tarjetas para que ocupen todo el ancho de su columna */
+margin: 0; /* No es necesario centrar las tarjetas en este caso */
+}
+
+.card-img-top {
+width: 100%; /* Asegura que la imagen se ajuste al ancho de la tarjeta */
+height: auto; /* Mantiene la proporción de la imagen */
+}
+
+.card-body  p{
+  font-size: 0.9rem; /* Disminuye el tamaño de la fuente si es necesario */
+}
+.card-text{
+  display: none;
+}
+
+}
+
+/**/
+
 
 .selected {
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.8), 0 4px 20px rgba(0, 0, 0, 0.5);
@@ -62,7 +129,6 @@ body {
   cursor: pointer;
 }
 
-
 #datosForm {
   max-width: 400px; /* Ancho máximo del formulario */
   margin: auto; /* Centrar el formulario */
@@ -70,26 +136,6 @@ body {
   background-color: #ffffff; /* Fondo blanco */
   border-radius: 10px; /* Bordes redondeados */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-.form-label {
-  font-weight: bold; /* Negrita para etiquetas */
-  color: #333; /* Color de texto */
-  margin-bottom: 5px; /* Espaciado inferior */
-}
-
-.form-control {
-  border: 1px solid #ccc; /* Borde claro */
-  border-radius: 5px; /* Bordes redondeados */
-  padding: 10px; /* Espaciado interno */
-  font-size: 16px; /* Tamaño de fuente */
-  transition: border-color 0.3s, box-shadow 0.3s; /* Transiciones suaves */
-}
-
-.form-control:focus {
-  border-color: #007bff; /* Color de borde al enfocar */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra azul suave al enfocar */
-  outline: none; /* Sin contorno */
 }
 
 
@@ -109,3 +155,32 @@ button:hover {
 }
 
 
+.quantity-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: lightgreen;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 12px;
+  display: none;
+}
+
+.quantity-controls {
+  display: none; 
+  padding: 0 10px; 
+  background-color: #f8f9fa; 
+  border-top: 1px solid #e0e0e0; 
+}
+
+.quantity-controls button {
+  margin: 0 5px;
+}
+
+.quantity-controls button:first-child {
+  background-color: rgb(216, 44, 44);
+}
+
+.quantity-controls button:last-child {
+  background-color: rgb(50, 216, 44);
+}

@@ -1,17 +1,114 @@
-// datos.js
+// Importar las funciones necesarias de Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+let totalCosto = 0 ;
+
+// Hacerla global
+window.idAleatorio = Math.floor(Math.random() * 9000) + 1000;
 
 //
 export let resumenTexto =  "Resumen de Pedido:\n\n";
 
-// Variable para almacenar el costo total
-export let totalCosto = 0; 
+// Configuración de Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyBFTypg5rh1dzt8fxmiA03UhKR8Uf3KA6Q",
+    authDomain: "tienda-c69be.firebaseapp.com",
+    projectId: "tienda-c69be",
+    storageBucket: "tienda-c69be.appspot.com",
+    messagingSenderId: "771742316743",
+    appId: "1:771742316743:web:2dd6d3822adc6f09b626e2"
+};
 
-// Función para actualizar el total
-export function actualizarTotal(nuevoTotal) {
-  totalCosto = nuevoTotal; 
+// Inicializar Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Función para insertar datos
+async function insertarDatos(nombre, direccion, telefono, total, ids , identificador) {
+    window.idAleatorio = Math.floor(Math.random() * 9000) + 1000;
+    try {
+        const docRef = await addDoc(collection(db, "productos"), {
+            nombre: nombre,
+            identificador, identificador,
+            direccion: direccion,
+            telefono: telefono,
+            total: total,
+            ids : ids
+        });
+        console.log("Documento escrito con ID: ", docRef.id);
+        alert("Pedido registrado, porfavor envia el ID a el asesor por Whatsapp");
+    } catch (e) {
+        console.error("Error al añadir documento: ", e);
+        alert("Error al insertar datos");
+    }
 }
 
-//Basde de datas de prueba *Array*.
+
+// Llama a la función con los datos que deseas insertar al hacer clic en finalizar compra
+window.onload = function() {
+    document.getElementById('finalizarCompra').addEventListener('click', function() {
+        // Mostrar el modal para ingresar datos del usuario
+        const datosModal = new bootstrap.Modal(document.getElementById('datosModal'));
+        datosModal.show();
+    });
+
+    document.getElementById('botonEnviarPedido').addEventListener('click', async function() {
+        
+        
+        
+        // Obtener los valores de los inputs del formulario
+        const nombre = document.getElementById('nombreInput').value;
+        const direccion = document.getElementById('direccionInput').value;
+        const telefono = document.getElementById('telefonoInput').value;
+
+        // Validar que los campos no estén vacíos
+        if (!nombre || !direccion || !telefono) {
+            alert("Todos los campos son obligatorios. Intenta de nuevo.");
+            return; // Salir de la función si algún campo está vacío
+        }
+
+        let idsProductos = Object.keys(productosSeleccionados).map(id => parseInt(id, 10)); // Convierte a entero
+        console.log(idsProductos); // Esto imprimirá un array con los IDs, por ejemplo: [1, 2]  
+
+        
+        
+        // Insertar datos en Firebase
+
+        if (window.modalCerradoPorBoton){
+
+            await insertarDatos(nombre, direccion, telefono, totalCosto,idsProductos, window.idAleatorio); // Aquí se utiliza totalCosto importado
+        }
+        // Cerrar el modal
+        const datosModal = bootstrap.Modal.getInstance(document.getElementById('datosModal'));
+        datosModal.hide();
+
+        // Limpiar los campos del formulario
+        document.getElementById('datosForm').reset();
+        
+    });
+
+    document.getElementById("cartIcon").addEventListener('click', async function() {
+        for (const [id, cantidad] of Object.entries(productosSeleccionados)) {
+            const producto = productos.find(p => p.id === parseInt(id));
+            if (producto) {
+              const costoProducto = parseFloat(producto.precio.replace('$', ''));
+              totalCosto += costoProducto * cantidad;
+              resumenTexto += `${producto.nombre}: ${cantidad} - Precio: $${costoProducto}\n`;
+            }
+        }
+    
+        alert(resumenTexto)
+    })
+
+
+};
+
+
+
+
+
+//Base de datas de prueba *Array*.
 export const productos = [
   { id: 1, nombre: "Café Colombiano", precio: "$8000", descripcion: "Café premium de origen colombiano.", categoria: "Bebidas", imagen: "https://exitocol.vtexassets.com/arquivos/ids/24490290/CAFE-MOLIDO-523968_a.jpg" },
   { id: 2, nombre: "Arequipe", precio: "$5500", descripcion: "Delicioso dulce de leche, ideal para untar.", categoria: "Dulces", imagen: "https://exitocol.vtexassets.com/arquivos/ids/24648975/Arequipe-Vaso-pote-755132_a.jpg" },
@@ -164,8 +261,6 @@ document.getElementById('guardarDatosButton').addEventListener('click', async fu
   // **LIMPIAR** el contenido del resumen antes de generar uno nuevo
   document.getElementById('resumenPedido').textContent = "";
 
-  // Calcular y mostrar el resumen del pedido
-  totalCosto = 0;
 
   for (const [id, cantidad] of Object.entries(productosSeleccionados)) {
     const producto = productos.find(p => p.id === parseInt(id));
@@ -226,6 +321,7 @@ closeModalButton.addEventListener('click', function(event) {
     pedidoModal.hide(); // Cerrar el modal
   }
 });
+
 
 //Manejo y lanzamiento del envio de la informacion
 botonEnviarPedido.addEventListener('click', function(event) {
