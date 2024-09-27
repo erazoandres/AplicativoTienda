@@ -126,7 +126,7 @@ window.onload = function() {
             if (producto) {
               const costoProducto = parseFloat(producto.precio.replace('$', ''));
               temp_totalCosto += costoProducto * cantidad;
-              temp_resumenTexto += `${producto.nombre}: ${cantidad} - Precio: $${costoProducto}\n`;
+              temp_resumenTexto += `${producto.nombre}: ${cantidad} - Precio: $${costoProducto * cantidad}\n`;
             }
         }
 
@@ -269,7 +269,7 @@ document.getElementById('guardarDatosButton').addEventListener('click', async fu
     if (producto) {
       const costoProducto = parseFloat(producto.precio.replace('$', ''));
       totalCosto += costoProducto * cantidad;
-      resumenTexto += `${producto.nombre}: ${cantidad} - Precio: $${costoProducto}\n`;
+      resumenTexto += `${producto.nombre}: ${cantidad} - Precio: $${(costoProducto * cantidad)}\n`;
     }
   }
 
