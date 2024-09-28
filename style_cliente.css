@@ -44,6 +44,11 @@ font-size: 85%;
   font-size: .8rem;
 }
 
+#productList{
+  height: 100vh;
+  overflow-y: scroll;
+}
+
 
 @media (max-width: 768px) {
 #productList {
