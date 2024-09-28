@@ -168,7 +168,7 @@
           // Mostrar las tarjetas
           const cardContainer = document.getElementById('cardContainer');
           cardContainer.innerHTML = ''; // Limpiar el contenedor
-
+          console.log(idsArray)
           idsArray.forEach(id => {
             const producto = productos.find(producto => producto.id === id);
         
@@ -177,9 +177,10 @@
               <div class="col-lg-3 col-md-6 col-sm-4 mb-4"> <!-- Diseño responsivo: 3 productos en pantallas grandes, 2 en medianas, 1 en pequeñas -->
                 <div class="card">
                   <img src="${producto.imagen}" class="card-img-top" alt="Imagen del producto">
-                  
+                
                   <div class="card-body">
                     <p class="card-title"> ${producto.nombre} </p>
+                    <p class="card-title"> ${producto.precio} </p>
                     <input type="checkbox" class="form-check-input" id="check-${id}-input">
                   </div>
                 </div>
