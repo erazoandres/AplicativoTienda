@@ -2,6 +2,9 @@
   // Importar Firebase
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
   import { getFirestore, collection, getDocs, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+  import { productos } from './productos.js';
+
+
 
   // Configuración de Firebase
   const firebaseConfig = {
@@ -167,13 +170,16 @@
           cardContainer.innerHTML = ''; // Limpiar el contenedor
 
           idsArray.forEach(id => {
+            const producto = productos.find(producto => producto.id === id);
+        
+            
             const idCard = `
               <div class="col-lg-3 col-md-6 col-sm-4 mb-4"> <!-- Diseño responsivo: 3 productos en pantallas grandes, 2 en medianas, 1 en pequeñas -->
                 <div class="card">
-                  <img src="licor.png" class="card-img-top" alt="Imagen del producto">
+                  <img src="${producto.imagen}" class="card-img-top" alt="Imagen del producto">
                   
                   <div class="card-body">
-                    <h5 class="card-title">ID: ${id}</h5>
+                    <p class="card-title"> ${producto.nombre} </p>
                     <input type="checkbox" class="form-check-input" id="check-${id}-input">
                   </div>
                 </div>

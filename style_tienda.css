@@ -33,6 +33,11 @@ body {
   cursor:default;
 }
 
+
+#title_card{
+  font-size: 2em !important;
+}
+
 #title3Last {
   background-color: rgba(255, 255, 255, 0.85);
   padding: 1rem;
@@ -56,8 +61,6 @@ ul li:hover {
   color: white;
   font-weight: bold;
 }
-
-
 
 /* Inputs de Formularios */
 .form-control {
@@ -115,6 +118,8 @@ button.btn-primary:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+
 
 .login-section:hover, .code-section:hover {
   transform: translateY(-2px);
@@ -175,9 +180,9 @@ h3, h4 {
     height: 100px; /* Reducimos el tamaño de las imágenes en pantallas pequeñas */
   }
 
-button.btn-primary {
-width: 100%; /* Botones ocupan todo el ancho en móviles */
-}
+  button.btn-primary {
+  width: 100%; /* Botones ocupan todo el ancho en móviles */
+  }
 }
 
 .list-group-item{
