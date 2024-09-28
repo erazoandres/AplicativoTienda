@@ -284,6 +284,7 @@ const closeModalButton = document.getElementById('closeModalButton');
 function confirmCloseModal2() {
   modalCerradoPorBoton = true;
   return confirm("¿Estás seguro de que quieres cerrar el resumen del pedido?\n PEDIDO NO SE REGISTRARA");
+
 }
 
 // Manejar el evento 'click' del botón de cerrar

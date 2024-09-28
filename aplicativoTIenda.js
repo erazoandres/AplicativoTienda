@@ -108,6 +108,7 @@
     } else {
       alert("Credenciales incorrectas. Por favor, intenta de nuevo.");
     }
+    
   });
 
   // Validación del formulario de código de 4 cifras y consulta en Firebase
