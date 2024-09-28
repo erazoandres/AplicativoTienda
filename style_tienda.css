@@ -46,7 +46,7 @@ body {
   max-height: 400px;
   overflow-y: auto;
   cursor: default;
-  transform: translateY(20%);
+  transform: translateY(10%);
 }
 
 #title3Last h4 {
@@ -118,6 +118,10 @@ button.btn-primary:hover {
   padding: 0 15px; /* Espaciado interno para móviles */
 }
 
+.login-section{
+  background-color: #4A90E2;
+}
+
 /* Secciones (Login, Código, Tarjetas) */
 .login-section, .code-section, .cards-section {
   background-color: white;
@@ -144,6 +148,7 @@ h3, h4 {
 form button:hover{
   font-weight: bold;
 }
+
 
 .container {
   max-width: 100%; /* Ocupa todo el ancho en pantallas móviles */
