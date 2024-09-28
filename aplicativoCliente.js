@@ -76,8 +76,7 @@ window.onload = function() {
         }
 
         let idsProductos = Object.keys(productosSeleccionados).map(id => parseInt(id, 10)); // Convierte a entero
-
-        
+       
         
         // Insertar datos en Firebase
 

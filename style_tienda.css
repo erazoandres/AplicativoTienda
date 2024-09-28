@@ -53,14 +53,22 @@ body {
   padding: 10px ;
 }
 
+
 /* Hover en Lista */
 ul li:hover {
-  background-color: #4A90E2;
+  /*background-color: #4A90E2;*/
   transition: 0.4s ease;
   cursor: default;
   color: white;
   font-weight: bold;
 }
+
+
+/*Color de precio: hover de ul li*/
+ul li:hover span{
+  color: #50E3C2;
+}
+
 
 /* Inputs de Formularios */
 .form-control {
@@ -190,7 +198,7 @@ h3, h4 {
 }
 
 #productoDetalles li{
-  padding:3px !important;
+  padding: 1px 7px !important;
 }
 
 /* Aumentar la especificidad del selector */

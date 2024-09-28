@@ -1,10 +1,7 @@
-
   // Importar Firebase
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
   import { getFirestore, collection, getDocs, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
   import { productos } from './productos.js';
-
-
 
   // Configuración de Firebase
   const firebaseConfig = {
@@ -92,7 +89,7 @@
     const passwordInput = document.getElementById('password');
 
     // Credenciales predeterminadas
-    const validEmail = "admin@ejemplo.com";
+    const validEmail = "admin@titansdesings";
     const validPassword = "123456";
 
     // Validación de las credenciales
