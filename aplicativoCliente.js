@@ -300,7 +300,9 @@ closeModalButton.addEventListener('click', function(event) {
     const pedidoModal = bootstrap.Modal.getInstance(document.getElementById('pedidoModal'));
     pedidoModal.hide(); // Cerrar el modal
 
+
     
+
   }
 });
 
